@@ -29,3 +29,6 @@ public/admin/vendor/
 
 # Lokale Editor-/Agent-Einstellungen
 .claude/
+
+# Local Netlify folder
+.netlify
