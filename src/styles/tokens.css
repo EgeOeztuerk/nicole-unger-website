@@ -1,0 +1,67 @@
+/*
+ * Design-Tokens – zentrale Stellschrauben für Farben, Schriften und Abstände.
+ * Farbpalette (vorläufig): warmes Off-White, Anthrazit, gedecktes Petrol.
+ */
+:root {
+  /* Farben */
+  --color-bg: #f7f4ee;
+  --color-surface: #fffdf9;
+  --color-surface-alt: #efebe3;
+  --color-text: #26292b;
+  --color-text-muted: #595f63;
+  --color-heading: #1d2022;
+  --color-accent: #2f5361;
+  --color-accent-strong: #213c47;
+  --color-accent-soft: #dfe7e8;
+  --color-line: #d9d3c8;
+  --color-line-strong: #b9b1a4;
+  --color-inverse-bg: #26292b;
+  --color-inverse-text: #f2eee7;
+  --color-inverse-muted: #b7b3ab;
+  --color-focus: #2f5361;
+  --color-error: #9b2c2c;
+  --color-overlay: rgb(18 20 21 / 0.92);
+
+  /* Schriften */
+  --font-serif: 'Playfair Display Variable', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --text-xl: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  --text-2xl: clamp(1.75rem, 1.45rem + 1.4vw, 2.5rem);
+  --text-3xl: clamp(2.25rem, 1.7rem + 2.6vw, 3.75rem);
+  --text-display: clamp(2.75rem, 1.8rem + 4.6vw, 5.5rem);
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.65;
+  --tracking-wide: 0.14em;
+
+  /* Abstände */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+  --space-2xl: clamp(4rem, 3rem + 5vw, 7.5rem);
+  --space-section: clamp(4.5rem, 3rem + 6vw, 9rem);
+
+  /* Layout */
+  --container: 76rem;
+  --container-narrow: 46rem;
+  --measure: 66ch;
+  --gutter: clamp(1.25rem, 0.75rem + 2.5vw, 3rem);
+  --header-height: 4.5rem;
+
+  /* Formen & Bewegung */
+  --radius: 2px;
+  --border: 1px solid var(--color-line);
+  --shadow-soft: 0 1px 2px rgb(38 41 43 / 0.06), 0 8px 24px rgb(38 41 43 / 0.06);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration: 240ms;
+  --duration-slow: 1600ms;
+}

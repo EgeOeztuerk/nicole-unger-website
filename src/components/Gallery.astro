@@ -1,0 +1,231 @@
+---
+/**
+ * Bildergalerie im Grid mit leichter Lightbox (natives <dialog>).
+ * Ohne JavaScript öffnen die Links einfach das große Bild.
+ */
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { Locale } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  items: { image: ImageMetadata; alt: string; caption?: string }[];
+  locale: Locale;
+  label?: string;
+}
+
+const { items, locale, label } = Astro.props;
+const t = useTranslations(locale);
+const large = await Promise.all(items.map((item) => getImage({ src: item.image, width: 1600, format: 'webp' })));
+---
+
+<div class="gallery" data-gallery>
+  <ul class="gallery__grid" aria-label={label ?? t('gallery.label')}>
+    {
+      items.map((item, i) => (
+        <li>
+          <figure>
+            <a
+              class="gallery__link"
+              href={large[i].src}
+              data-gallery-item={i}
+              data-alt={item.alt}
+              data-caption={item.caption ?? ''}
+            >
+              <Image
+                src={item.image}
+                alt={item.alt}
+                widths={[320, 480, 720]}
+                sizes="(min-width: 64em) 25vw, (min-width: 40em) 33vw, 50vw"
+              />
+              <span class="visually-hidden">{t('gallery.open')}</span>
+            </a>
+            {item.caption && <figcaption>{item.caption}</figcaption>}
+          </figure>
+        </li>
+      ))
+    }
+  </ul>
+
+  <dialog class="lightbox" aria-label={label ?? t('gallery.label')} data-lightbox>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" alt="" data-lightbox-img />
+      <figcaption class="lightbox__caption" data-lightbox-caption></figcaption>
+    </figure>
+    <button class="lightbox__btn lightbox__close" type="button" data-lightbox-close aria-label={t('gallery.close')}>
+      <span aria-hidden="true">×</span>
+    </button>
+    <button class="lightbox__btn lightbox__prev" type="button" data-lightbox-prev aria-label={t('gallery.prev')}>
+      <span aria-hidden="true">‹</span>
+    </button>
+    <button class="lightbox__btn lightbox__next" type="button" data-lightbox-next aria-label={t('gallery.next')}>
+      <span aria-hidden="true">›</span>
+    </button>
+  </dialog>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((root) => {
+    const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-gallery-item]')];
+    const dialog = root.querySelector<HTMLDialogElement>('[data-lightbox]');
+    const img = root.querySelector<HTMLImageElement>('[data-lightbox-img]');
+    const caption = root.querySelector<HTMLElement>('[data-lightbox-caption]');
+    if (!dialog || !img || !caption || links.length === 0) return;
+    let index = 0;
+    let opener: HTMLElement | null = null;
+
+    const show = (i: number) => {
+      index = (i + links.length) % links.length;
+      const link = links[index];
+      img.src = link.href;
+      img.alt = link.dataset.alt ?? '';
+      caption.textContent = link.dataset.caption ?? '';
+      caption.hidden = !link.dataset.caption;
+    };
+
+    links.forEach((link, i) =>
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        opener = link;
+        show(i);
+        dialog.showModal();
+      }),
+    );
+    root.querySelector('[data-lightbox-close]')?.addEventListener('click', () => dialog.close());
+    root.querySelector('[data-lightbox-prev]')?.addEventListener('click', () => show(index - 1));
+    root.querySelector('[data-lightbox-next]')?.addEventListener('click', () => show(index + 1));
+    dialog.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') show(index - 1);
+      if (e.key === 'ArrowRight') show(index + 1);
+    });
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => opener?.focus());
+
+    let startX = 0;
+    dialog.addEventListener('touchstart', (e) => (startX = e.touches[0].clientX), { passive: true });
+    dialog.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
+    });
+  });
+</script>
+
+<style>
+  .gallery__grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+  @media (min-width: 40em) {
+    .gallery__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+    }
+  }
+  @media (min-width: 64em) {
+    .gallery__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .gallery__link {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: var(--color-surface-alt);
+    cursor: zoom-in;
+  }
+  .gallery__link :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms var(--ease), opacity var(--duration) var(--ease);
+  }
+  .gallery__link:hover :global(img) {
+    transform: scale(1.03);
+  }
+  figcaption {
+    margin-top: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .lightbox {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    padding: var(--space-xl) var(--space-2xl);
+    border: 0;
+    background: transparent;
+    color: var(--color-inverse-text);
+  }
+  .lightbox::backdrop {
+    background: var(--color-overlay);
+  }
+  .lightbox[open] {
+    display: grid;
+    place-items: center;
+  }
+  .lightbox__figure {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-sm);
+    max-height: 100%;
+  }
+  .lightbox__img {
+    max-width: 100%;
+    max-height: calc(100vh - 8rem);
+    width: auto;
+    object-fit: contain;
+  }
+  .lightbox__caption {
+    font-size: var(--text-sm);
+    color: var(--color-inverse-muted);
+  }
+  .lightbox__btn {
+    position: fixed;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: 0;
+    background: none;
+    color: var(--color-inverse-text);
+    font-size: 2.25rem;
+    line-height: 1;
+    font-family: var(--font-serif);
+  }
+  .lightbox__btn:focus-visible {
+    outline-color: #fff;
+  }
+  .lightbox__close {
+    top: var(--space-md);
+    right: var(--space-md);
+  }
+  .lightbox__prev,
+  .lightbox__next {
+    top: 50%;
+    translate: 0 -50%;
+  }
+  .lightbox__prev {
+    left: var(--space-sm);
+  }
+  .lightbox__next {
+    right: var(--space-sm);
+  }
+  @media (max-width: 40em) {
+    .lightbox {
+      padding: var(--space-2xl) var(--space-xs);
+    }
+    .lightbox__prev,
+    .lightbox__next {
+      top: auto;
+      bottom: var(--space-md);
+      translate: none;
+    }
+  }
+</style>

@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import YouTubeConsent from '../components/YouTubeConsent.astro';
+import Gallery from '../components/Gallery.astro';
+import VitaTables from '../components/VitaTables.astro';
+import type { Locale } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+import { getLocalized, getPage, getSettings } from '../lib/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const { data } = await getPage('acting', 'schauspiel', locale);
+const vita = await getLocalized('vita', locale);
+const settings = await getSettings();
+---
+
+<BaseLayout title={data.title} description={data.description} locale={locale} current="acting" ogImage={data.gallery[0]?.image}>
+  <PageIntro title={data.title} kicker={data.kicker} lead={data.intro} />
+
+  <section class="section showreel" aria-labelledby="showreel-title">
+    <div class="container">
+      <YouTubeConsent
+        videoId={data.showreel.youtubeId}
+        title={data.showreel.heading}
+        poster={data.showreel.poster}
+        posterAlt={data.showreel.posterAlt}
+        locale={locale}
+      />
+      <h2 id="showreel-title" class="showreel__label kicker">{data.showreel.heading}</h2>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="gallery-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="gallery-title">{data.galleryHeading}</h2>
+      </div>
+      <Gallery items={data.gallery} locale={locale} label={data.galleryHeading} />
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="vita-title">
+    <div class="container vita-layout">
+      <div class="section-head">
+        <h2 id="vita-title">{data.vitaHeading}</h2>
+      </div>
+      <VitaTables entries={vita} locale={locale} />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="booking-title">
+    <div class="container booking">
+      <div class="booking__main">
+        <span class="kicker">{settings.agency.name}</span>
+        <h2 id="booking-title">{data.booking.heading}</h2>
+        <p>{data.booking.text}</p>
+        <a class="button" href={settings.agency.url} target="_blank" rel="noopener">
+          {data.booking.linkLabel}<span class="visually-hidden"> {t('common.externalLink')}</span>
+        </a>
+        {
+          (settings.agency.email || settings.agency.phone) && (
+            <p class="booking__contact muted">
+              {settings.agency.email && <a href={`mailto:${settings.agency.email}`}>{settings.agency.email}</a>}
+              {settings.agency.email && settings.agency.phone && ' · '}
+              {settings.agency.phone && <a href={`tel:${settings.agency.phone.replace(/\s/g, '')}`}>{settings.agency.phone}</a>}
+            </p>
+          )
+        }
+      </div>
+      <div class="booking__profiles">
+        <h3>{data.profilesHeading}</h3>
+        <ul>
+          {
+            settings.profiles.map((p) => (
+              <li>
+                <a class="link-arrow" href={p.url} target="_blank" rel="noopener">
+                  {p.label}
+                  <span class="visually-hidden"> {t('common.externalLink')}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .showreel {
+    padding-top: 0;
+  }
+  .showreel__label {
+    margin-top: var(--space-sm);
+    margin-bottom: 0;
+    color: var(--color-text-muted);
+  }
+  .booking {
+    display: grid;
+    gap: var(--space-xl);
+    padding: var(--space-xl) 0 0;
+    border-top: 1px solid var(--color-line-strong);
+  }
+  .booking__main {
+    display: grid;
+    gap: var(--space-md);
+    justify-items: start;
+    max-width: 34rem;
+  }
+  .booking__main .kicker {
+    margin-bottom: 0;
+  }
+  .booking__contact {
+    font-size: var(--text-sm);
+  }
+  .booking__profiles h3 {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+  }
+  .booking__profiles ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    gap: var(--space-xs) var(--space-xl);
+  }
+  @media (min-width: 56em) {
+    .booking {
+      grid-template-columns: 1.2fr 1fr;
+    }
+  }
+</style>

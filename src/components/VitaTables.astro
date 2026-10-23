@@ -1,0 +1,117 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Locale } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  entries: CollectionEntry<'vita'>[];
+  locale: Locale;
+}
+
+const { entries, locale } = Astro.props;
+const t = useTranslations(locale);
+const categories = ['kino', 'tv', 'theater'] as const;
+const groups = categories
+  .map((category) => ({
+    category,
+    items: entries
+      .filter((e) => e.data.category === category)
+      .sort((a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title)),
+  }))
+  .filter((g) => g.items.length > 0);
+---
+
+<div class="vita">
+  {
+    groups.map((group) => (
+      <div class="table-wrap">
+        <table class="data-table">
+          <caption>{t(`vita.${group.category}`)}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{t('vita.year')}</th>
+              <th scope="col">{t('vita.title')}</th>
+              <th scope="col">{t('vita.role')}</th>
+              <th scope="col">{t('vita.director')}</th>
+              <th scope="col">{t('vita.company')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {group.items.map(({ data }) => (
+              <tr>
+                <td>{data.year}</td>
+                <th scope="row">{data.title}</th>
+                <td data-label={t('vita.role')}>{data.role}</td>
+                <td data-label={t('vita.director')}>{data.director}</td>
+                <td data-label={t('vita.company')}>{data.company}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .vita {
+    display: grid;
+    gap: var(--space-xl);
+  }
+  tbody th {
+    font-weight: 500;
+    color: var(--color-heading);
+  }
+  @media (min-width: 40.01em) {
+    .data-table {
+      table-layout: fixed;
+    }
+    thead th:nth-child(1) {
+      width: 5.5rem;
+    }
+    thead th:nth-child(2) {
+      width: 28%;
+    }
+    thead th:nth-child(3) {
+      width: 18%;
+    }
+    thead th:nth-child(4) {
+      width: 20%;
+    }
+  }
+  @media (max-width: 40em) {
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+    tr {
+      display: grid;
+      grid-template-columns: 3.25rem 1fr;
+      padding-block: 0.85rem;
+      border-bottom: var(--border);
+    }
+    .data-table tbody th,
+    .data-table tbody td {
+      grid-column: 2;
+      padding: 0;
+      border: 0;
+    }
+    .data-table tbody td:first-child {
+      grid-column: 1;
+      grid-row: 1 / span 4;
+    }
+    .data-table tbody td[data-label] {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+    .data-table tbody td[data-label]::before {
+      content: attr(data-label) ': ';
+    }
+    .data-table tbody td:empty {
+      display: none;
+    }
+  }
+</style>

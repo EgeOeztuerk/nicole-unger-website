@@ -1,0 +1,241 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import type { Locale } from '../i18n/config';
+import { localizePath } from '../i18n/routes';
+import { useTranslations } from '../i18n/ui';
+import { getLocalized, getPage } from '../lib/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const page = await getPage('dramaturgy', 'dramaturgie', locale);
+const { data } = page;
+const { Content } = await render(page);
+const stations = (await getLocalized('stations', locale)).sort((a, b) => b.data.sortYear - a.data.sortYear);
+const contactHref = `${localizePath('about', locale)}?anliegen=lektorat#kontakt`;
+---
+
+<BaseLayout title={data.title} description={data.description} locale={locale} current="dramaturgy" ogImage={data.image?.image}>
+  <PageIntro title={data.title} kicker={data.kicker} lead={data.lead} />
+
+  <section class="section profile" aria-label="Profil">
+    <div class="container profile__grid">
+      <div class="profile__text">
+        <div class="prose">
+          <Content />
+        </div>
+        {data.languagesNote && <p class="profile__languages">{data.languagesNote}</p>}
+      </div>
+      {
+        data.image && (
+          <div class="profile__media">
+            <Image src={data.image.image} alt={data.image.alt} widths={[480, 720, 960]} sizes="(min-width: 64em) 30vw, 100vw" />
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="references" aria-labelledby="references-title">
+    <div class="container references__inner">
+      <h2 id="references-title" class="references__label">{data.references.label}</h2>
+      <ul class="references__list">
+        {data.references.items.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  {
+    stations.length > 0 && (
+      <section class="section" aria-labelledby="stations-title">
+        <div class="container">
+          <div class="section-head">
+            <h2 id="stations-title">{data.stationsHeading}</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table stations">
+              <thead>
+                <tr>
+                  <th scope="col">{t('stations.period')}</th>
+                  <th scope="col">{t('stations.org')}</th>
+                  <th scope="col">{t('stations.activity')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stations.map(({ data: s }) => (
+                  <tr>
+                    <td>{s.period}</td>
+                    <th scope="row">{s.organisation}</th>
+                    <td>{s.activity}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section section--alt" aria-labelledby="packages-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="packages-title">{data.packagesHeading}</h2>
+      </div>
+      <ol class="packages">
+        {
+          data.packages.map((pkg, i) => (
+            <li class="package">
+              <span class="package__no" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 class="package__title">{pkg.title}</h3>
+              <p class="package__tagline">{pkg.tagline}</p>
+              <p class="package__service">{pkg.service}</p>
+              <p class="package__fee">{pkg.fee}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="fee-note">{data.feeNote}</p>
+      <div class="cta">
+        {data.cta.text && <p class="lead">{data.cta.text}</p>}
+        <a class="button" href={contactHref}>{data.cta.label}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .profile {
+    padding-top: 0;
+  }
+  .profile__grid {
+    display: grid;
+    gap: var(--space-xl);
+  }
+  @media (min-width: 64em) {
+    .profile__grid {
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      align-items: start;
+      gap: var(--space-2xl);
+    }
+  }
+  .profile__text .prose {
+    font-size: var(--text-lg);
+    line-height: 1.7;
+  }
+  .profile__languages {
+    margin-top: var(--space-lg);
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--color-accent);
+    color: var(--color-text-muted);
+  }
+  .profile__media :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .references {
+    border-block: var(--border);
+    padding-block: var(--space-lg);
+  }
+  .references__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-sm) var(--space-xl);
+  }
+  .references__label {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+  .references__list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs) 0;
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    color: var(--color-heading);
+  }
+  .references__list li:not(:last-child)::after {
+    content: '|';
+    margin-inline: 0.9rem;
+    color: var(--color-line-strong);
+  }
+
+  .stations tbody th {
+    font-weight: 500;
+    color: var(--color-heading);
+  }
+
+  .packages {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-md);
+  }
+  @media (min-width: 56em) {
+    .packages {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .package {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border-top: 2px solid var(--color-accent);
+  }
+  .package__no {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    color: var(--color-accent);
+  }
+  .package__title {
+    font-size: var(--text-xl);
+  }
+  .package__tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-text);
+  }
+  .package__service {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    flex: 1;
+  }
+  .package__fee {
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: var(--border);
+    font-weight: 500;
+    color: var(--color-heading);
+  }
+  .fee-note {
+    max-width: var(--measure);
+    margin-top: var(--space-lg);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+  .cta {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+</style>

@@ -1,0 +1,451 @@
+# Decap CMS – Konfiguration
+# Muss exakt zu src/content.config.ts (Zod-Schemas) passen.
+# Doku: https://decapcms.org/docs/configuration-options/
+
+# ---------------------------------------------------------------------------
+# Backend (Login). Siehe README, Abschnitt „CMS-Login einrichten“.
+# Variante A (Standard): GitHub-Backend + Netlify als OAuth-Provider.
+backend:
+  name: github
+  repo: DEIN-GITHUB-NAME/nicole-unger-website # <- nach dem Push anpassen
+  branch: main
+  commit_messages:
+    create: 'Neu: {{collection}} „{{slug}}“'
+    update: 'Aktualisiert: {{collection}} „{{slug}}“'
+    delete: 'Gelöscht: {{collection}} „{{slug}}“'
+    uploadMedia: 'Datei hochgeladen: {{path}}'
+    deleteMedia: 'Datei gelöscht: {{path}}'
+
+# Variante B (ohne GitHub-Konto für Nicole): Decap Turbo – stattdessen:
+# backend:
+#   name: turbo-github
+#   turbo_site_id: DEINE-TURBO-SITE-ID
+
+# Lokal: `npm run dev:cms` startet decap-server; dann wird ohne Login direkt
+# ins Projektverzeichnis geschrieben. Auf der Live-Seite wird das ignoriert.
+local_backend: true
+
+locale: de
+site_url: https://nicoleunger-creative.de
+display_url: https://nicoleunger-creative.de
+
+# Bilder landen in src/assets/uploads und werden von Astro (astro:assets) optimiert.
+media_folder: src/assets/uploads
+public_folder: /src/assets/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+
+editor:
+  preview: false
+
+# Mehrsprachigkeit vorbereitet: weitere Sprachen hier ergänzen (z. B. [de, en, fr]).
+# Listen-Sammlungen liegen unter <ordner>/<sprache>/<eintrag>.md.
+i18n:
+  structure: multiple_folders
+  locales: [de]
+  default_locale: de
+
+collections:
+  # =========================================================================
+  # Einzelseiten (Deutsch). Für EN/FR später eine Kopie dieser Sammlung mit
+  # Pfaden src/content/pages/en/… bzw. …/fr/… anlegen.
+  # =========================================================================
+  - name: seiten
+    label: Seiten
+    label_singular: Seite
+    description: Texte und Bilder der einzelnen Seiten.
+    delete: false
+    files:
+      - name: home
+        label: Startseite
+        file: src/content/pages/de/home.md
+        fields:
+          - { label: Seitentitel (Browser-Tab & Google), name: title, widget: string }
+          - { label: Kurzbeschreibung für Google (max. 200 Zeichen), name: description, widget: text, required: false }
+          - { label: Überschrift, name: headline, widget: string }
+          - label: Disziplinen (unter der Überschrift)
+            name: disciplines
+            widget: list
+            required: false
+            collapsed: false
+            field: { label: Disziplin, name: discipline, widget: string }
+          - label: Titelbilder (Slider)
+            name: heroImages
+            widget: list
+            min: 1
+            hint: Ein Bild = statisches Titelbild. Mehrere Bilder wechseln sanft.
+            summary: '{{fields.alt}}'
+            fields:
+              - { label: Bild, name: image, widget: image, choose_url: false }
+              - { label: Bildbeschreibung (Alternativtext), name: alt, widget: string, hint: 'Pflicht. Beschreibt das Bild für Menschen, die es nicht sehen können.' }
+          - { label: Einleitungssatz, name: intro, widget: text, required: false }
+          - label: Kacheln
+            name: tiles
+            widget: list
+            min: 1
+            max: 4
+            summary: '{{fields.title}}'
+            fields:
+              - { label: Titel, name: title, widget: string }
+              - { label: Text, name: text, widget: text }
+              - label: Verlinkt auf
+                name: link
+                widget: select
+                options:
+                  - { label: Schauspiel, value: acting }
+                  - { label: Sprechen, value: voice }
+                  - { label: Dramaturgie & Lektorat, value: dramaturgy }
+                  - { label: Stories, value: stories }
+                  - { label: Über mich & Kontakt, value: about }
+              - { label: Bild, name: image, widget: image, choose_url: false }
+              - { label: Bildbeschreibung (Alternativtext), name: alt, widget: string }
+
+      - name: schauspiel
+        label: Schauspiel
+        file: src/content/pages/de/schauspiel.md
+        fields:
+          - { label: Seitentitel, name: title, widget: string }
+          - { label: Kurzbeschreibung für Google, name: description, widget: text, required: false }
+          - { label: Dachzeile, name: kicker, widget: string, required: false }
+          - { label: Einleitung, name: intro, widget: text, required: false }
+          - label: Showreel
+            name: showreel
+            widget: object
+            fields:
+              - { label: Überschrift, name: heading, widget: string }
+              - label: YouTube-Video-ID
+                name: youtubeId
+                widget: string
+                hint: 'Die 11 Zeichen nach „watch?v=“ in der YouTube-Adresse, z. B. bei youtube.com/watch?v=AbCdEfGhIjK → AbCdEfGhIjK. „PLATZHALTER“ zeigt „Showreel folgt“.'
+                pattern: ['^[\w-]{11}$', 'Bitte genau die 11-stellige YouTube-ID eintragen.']
+              - { label: Vorschaubild, name: poster, widget: image, choose_url: false }
+              - { label: Bildbeschreibung (Alternativtext), name: posterAlt, widget: string }
+          - { label: Überschrift Galerie, name: galleryHeading, widget: string }
+          - label: Galerie (Headshots & Szenenbilder)
+            name: gallery
+            widget: list
+            summary: '{{fields.alt}}'
+            fields:
+              - { label: Bild, name: image, widget: image, choose_url: false }
+              - { label: Bildbeschreibung (Alternativtext), name: alt, widget: string }
+              - { label: Bildunterschrift / Fotocredit, name: caption, widget: string, required: false }
+          - { label: Überschrift Vita, name: vitaHeading, widget: string, hint: 'Die Vita-Einträge selbst pflegen Sie unter „Vita (Schauspiel)“.' }
+          - { label: Überschrift Profile, name: profilesHeading, widget: string, hint: 'Die Links pflegen Sie unter „Einstellungen“.' }
+          - label: Buchungshinweis
+            name: booking
+            widget: object
+            fields:
+              - { label: Überschrift, name: heading, widget: string }
+              - { label: Text, name: text, widget: text }
+              - { label: Beschriftung Agentur-Button, name: linkLabel, widget: string }
+
+      - name: sprechen
+        label: Sprechen
+        file: src/content/pages/de/sprechen.md
+        fields:
+          - { label: Seitentitel, name: title, widget: string }
+          - { label: Kurzbeschreibung für Google, name: description, widget: text, required: false }
+          - { label: Dachzeile, name: kicker, widget: string, required: false }
+          - { label: Einleitung, name: intro, widget: text, required: false }
+          - label: Bild
+            name: image
+            widget: object
+            required: false
+            fields:
+              - { label: Bild, name: image, widget: image, choose_url: false }
+              - { label: Bildbeschreibung (Alternativtext), name: alt, widget: string }
+          - { label: Überschrift Hörproben, name: loungeHeading, widget: string, hint: 'Die Hörproben selbst pflegen Sie unter „Hörproben“.' }
+          - { label: Überschrift Stimmmerkmale, name: traitsHeading, widget: string }
+          - label: Stimmmerkmale
+            name: traits
+            widget: list
+            summary: '{{fields.label}}: {{fields.value}}'
+            fields:
+              - { label: Merkmal, name: label, widget: string }
+              - { label: Wert, name: value, widget: string }
+          - label: Kontaktkasten
+            name: contact
+            widget: object
+            fields:
+              - { label: Überschrift, name: heading, widget: string }
+              - { label: Text, name: text, widget: text }
+              - label: E-Mail-Adresse
+                name: emailKey
+                widget: relation
+                collection: einstellungen
+                file: site
+                search_fields: ['emails.*.label']
+                value_field: 'emails.*.key'
+                display_fields: ['emails.*.label']
+
+      - name: dramaturgie
+        label: Dramaturgie & Lektorat
+        file: src/content/pages/de/dramaturgie.md
+        fields:
+          - { label: Seitentitel, name: title, widget: string }
+          - { label: Kurzbeschreibung für Google, name: description, widget: text, required: false }
+          - { label: Dachzeile, name: kicker, widget: string, required: false }
+          - { label: Leitsatz, name: lead, widget: string }
+          - { label: Profiltext, name: body, widget: markdown, buttons: [bold, italic, link, bulleted-list], editor_components: [] }
+          - label: Bild
+            name: image
+            widget: object
+            required: false
+            fields:
+              - { label: Bild, name: image, widget: image, choose_url: false }
+              - { label: Bildbeschreibung (Alternativtext), name: alt, widget: string }
+          - { label: Hinweis Sprachen, name: languagesNote, widget: string, required: false }
+          - label: Referenzleiste
+            name: references
+            widget: object
+            fields:
+              - { label: Beschriftung, name: label, widget: string }
+              - { label: Referenzen, name: items, widget: list, collapsed: false, field: { label: Name, name: item, widget: string } }
+          - { label: Überschrift Stationen, name: stationsHeading, widget: string, hint: 'Die Stationen selbst pflegen Sie unter „Stationen (Dramaturgie)“.' }
+          - { label: Überschrift Angebot, name: packagesHeading, widget: string }
+          - label: Leistungspakete
+            name: packages
+            widget: list
+            min: 1
+            summary: '{{fields.title}}'
+            hint: Drei Pakete passen optimal ins Layout (auf dem Handy untereinander).
+            fields:
+              - { label: Titel, name: title, widget: string }
+              - { label: Untertitel, name: tagline, widget: string }
+              - { label: Leistung, name: service, widget: text }
+              - { label: Honorar, name: fee, widget: string }
+          - { label: Hinweis zu den Honoraren, name: feeNote, widget: text }
+          - label: Aufruf zur Anfrage
+            name: cta
+            widget: object
+            fields:
+              - { label: Text, name: text, widget: string, required: false }
+              - { label: Button-Beschriftung, name: label, widget: string }
+
+      - name: stories
+        label: Stories (Seitentexte)
+        file: src/content/pages/de/stories.md
+        fields:
+          - { label: Seitentitel, name: title, widget: string }
+          - { label: Kurzbeschreibung für Google, name: description, widget: text, required: false }
+          - { label: Dachzeile, name: kicker, widget: string, required: false }
+          - { label: Einleitung, name: intro, widget: text, required: false, hint: 'Die Projekte selbst pflegen Sie unter „Stories – Projekte“.' }
+
+      - name: ueber-mich
+        label: Über mich & Kontakt
+        file: src/content/pages/de/ueber-mich.md
+        fields:
+          - { label: Seitentitel, name: title, widget: string }
+          - { label: Kurzbeschreibung für Google, name: description, widget: text, required: false }
+          - { label: Dachzeile, name: kicker, widget: string, required: false }
+          - { label: Leitsatz, name: lead, widget: string }
+          - label: Porträt
+            name: portrait
+            widget: object
+            fields:
+              - { label: Bild, name: image, widget: image, choose_url: false }
+              - { label: Bildbeschreibung (Alternativtext), name: alt, widget: string }
+          - { label: Biografie, name: body, widget: markdown, buttons: [bold, italic, link, heading-three, bulleted-list], editor_components: [] }
+          - label: Engagement
+            name: engagement
+            widget: object
+            fields:
+              - { label: Überschrift, name: heading, widget: string }
+              - { label: Text, name: text, widget: string, required: false }
+              - { label: Punkte, name: items, widget: list, required: false, collapsed: false, field: { label: Punkt, name: item, widget: string } }
+          - label: Kontaktbereich
+            name: contact
+            widget: object
+            fields:
+              - { label: Überschrift, name: heading, widget: string }
+              - { label: Einleitung, name: intro, widget: text }
+              - { label: Überschrift Formular, name: formHeading, widget: string }
+              - { label: Überschrift E-Mail-Adressen, name: mailHeading, widget: string }
+
+      - name: impressum
+        label: Impressum
+        file: src/content/pages/de/impressum.md
+        fields:
+          - { label: Seitentitel, name: title, widget: string }
+          - { label: Text, name: body, widget: markdown }
+
+      - name: datenschutz
+        label: Datenschutzerklärung
+        file: src/content/pages/de/datenschutz.md
+        fields:
+          - { label: Seitentitel, name: title, widget: string }
+          - { label: Text, name: body, widget: markdown }
+
+  # =========================================================================
+  # Listen-Sammlungen
+  # =========================================================================
+  - name: vita
+    label: Vita (Schauspiel)
+    label_singular: Vita-Eintrag
+    description: Produktionen für Kino & Film, Fernsehen und Theater.
+    folder: src/content/vita
+    create: true
+    i18n: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    identifier_field: title
+    summary: '{{fields.year}} · {{fields.title}}'
+    sortable_fields: [year, title, category]
+    view_groups:
+      - { label: Bereich, field: category }
+    fields:
+      - { label: Produktion / Titel, name: title, widget: string, i18n: true }
+      - label: Bereich
+        name: category
+        widget: select
+        i18n: duplicate
+        options:
+          - { label: Kino & Film, value: kino }
+          - { label: Fernsehen, value: tv }
+          - { label: Theater, value: theater }
+      - { label: Jahr, name: year, widget: number, value_type: int, min: 1950, max: 2100, i18n: duplicate }
+      - { label: Rolle, name: role, widget: string, required: false, i18n: true }
+      - { label: Regie, name: director, widget: string, required: false, i18n: duplicate }
+      - { label: Produktion / Sender / Bühne, name: company, widget: string, required: false, i18n: duplicate }
+
+  - name: stationen
+    label: Stationen (Dramaturgie)
+    label_singular: Station
+    description: Tabelle auf der Seite Dramaturgie & Lektorat.
+    folder: src/content/stations
+    create: true
+    i18n: true
+    extension: md
+    format: frontmatter
+    slug: '{{organisation}}'
+    identifier_field: organisation
+    summary: '{{fields.period}} · {{fields.organisation}}'
+    sortable_fields: [sortYear, organisation]
+    fields:
+      - { label: Zeitraum (Anzeige), name: period, widget: string, hint: 'z. B. „seit 2015“ oder „2016–2020“', i18n: true }
+      - { label: Jahr für die Sortierung, name: sortYear, widget: number, value_type: int, hint: 'Neueste zuerst. Meist das Startjahr.', i18n: duplicate }
+      - { label: Auftraggeber / Institution, name: organisation, widget: string, i18n: duplicate }
+      - { label: Tätigkeit, name: activity, widget: string, i18n: true }
+
+  - name: hoerproben
+    label: Hörproben
+    label_singular: Hörprobe
+    description: Hörproben der Audio-Lounge (Seite Sprechen).
+    folder: src/content/audio
+    create: true
+    i18n: true
+    extension: md
+    format: frontmatter
+    slug: '{{title}}'
+    identifier_field: title
+    summary: '{{fields.title}}'
+    sortable_fields: [category, order, title]
+    view_groups:
+      - { label: Kategorie, field: category }
+    fields:
+      - { label: Titel, name: title, widget: string, i18n: true }
+      - label: Kategorie (Tab)
+        name: category
+        widget: select
+        i18n: duplicate
+        options:
+          - { label: Hörbuch & Literarisches, value: hoerbuch }
+          - { label: Synchron & Voiceover, value: synchron }
+          - { label: Werbung & Dokumentation, value: werbung }
+      - label: Sprache(n)
+        name: languages
+        widget: select
+        multiple: true
+        min: 1
+        i18n: duplicate
+        options:
+          - { label: Deutsch, value: de }
+          - { label: Französisch, value: fr }
+          - { label: Englisch, value: en }
+          - { label: Bairisch, value: bar }
+      - label: Audiodatei
+        name: file
+        widget: file
+        choose_url: false
+        media_folder: /public/audio
+        public_folder: /audio
+        i18n: duplicate
+        hint: 'MP3 (empfohlen), M4A, WAV oder OGG. Ideal: kurze Proben bis ca. 2 Minuten, MP3 mit 128–192 kbit/s.'
+        pattern: ['^/audio/.+\.(mp3|m4a|wav|ogg)$', 'Bitte eine Audiodatei (MP3, M4A, WAV oder OGG) hochladen.']
+      - { label: Kurzbeschreibung, name: description, widget: string, required: false, i18n: true }
+      - { label: Reihenfolge, name: order, widget: number, value_type: int, default: 100, hint: 'Kleinere Zahl = weiter oben.', i18n: duplicate }
+
+  - name: stories-projekte
+    label: Stories – Projekte
+    label_singular: Projekt
+    description: Drehbücher, Romane und weitere Stoffe.
+    folder: src/content/stories
+    create: true
+    i18n: true
+    extension: md
+    format: frontmatter
+    slug: '{{title}}'
+    identifier_field: title
+    summary: '{{fields.title}} · {{fields.kind}}'
+    sortable_fields: [order, title]
+    fields:
+      - { label: Titel, name: title, widget: string, i18n: true }
+      - { label: Art, name: kind, widget: string, hint: 'z. B. „Drehbuch – Spielfilm“, „Roman“, „Serienkonzept“', i18n: true }
+      - { label: Jahr, name: year, widget: string, required: false, i18n: duplicate }
+      - { label: Status, name: status, widget: string, required: false, hint: 'z. B. „In Entwicklung“, „Veröffentlicht 2025“', i18n: true }
+      - { label: Logline / Kurzbeschreibung, name: logline, widget: text, i18n: true }
+      - { label: Bild, name: image, widget: image, required: false, choose_url: false, i18n: duplicate }
+      - { label: Bildbeschreibung (Alternativtext), name: alt, widget: string, required: false, hint: 'Pflicht, sobald ein Bild gesetzt ist.', i18n: true }
+      - { label: Auszeichnung, name: award, widget: string, required: false, i18n: true }
+      - { label: Link-Beschriftung, name: linkLabel, widget: string, required: false, i18n: true }
+      - label: Link-Adresse
+        name: linkUrl
+        widget: string
+        required: false
+        i18n: duplicate
+        pattern: ['^https?://.+', 'Bitte eine vollständige Adresse mit https:// eintragen.']
+      - { label: Reihenfolge, name: order, widget: number, value_type: int, default: 100, hint: 'Kleinere Zahl = weiter oben.', i18n: duplicate }
+
+  # =========================================================================
+  # Einstellungen (sprachunabhängig)
+  # =========================================================================
+  - name: einstellungen
+    label: Einstellungen
+    description: Links, Agentur und E-Mail-Adressen – gelten für die ganze Website.
+    delete: false
+    files:
+      - name: site
+        label: Links & Kontaktadressen
+        file: src/content/settings/site.json
+        format: json
+        fields:
+          - { label: Name der Website, name: siteName, widget: string }
+          - { label: Unterzeile im Kopfbereich, name: tagline, widget: string }
+          - label: Agentur (Schauspiel-Anfragen)
+            name: agency
+            widget: object
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Profil-Adresse (URL), name: url, widget: string, pattern: ['^https?://.+', 'Bitte eine vollständige Adresse mit https:// eintragen.'] }
+              - { label: E-Mail, name: email, widget: string, required: false }
+              - { label: Telefon, name: phone, widget: string, required: false }
+          - label: Profile & Datenbanken (Kopf- und Fußbereich)
+            name: profiles
+            widget: list
+            summary: '{{fields.label}}'
+            fields:
+              - { label: Bezeichnung, name: label, widget: string }
+              - { label: Adresse (URL), name: url, widget: string, pattern: ['^https?://.+', 'Bitte eine vollständige Adresse mit https:// eintragen.'] }
+          - label: E-Mail-Adressen
+            name: emails
+            widget: list
+            summary: '{{fields.label}}: {{fields.address}}'
+            hint: 'Der „Schlüssel“ (z. B. info, lektorat) wird intern verwendet – bitte bestehende Schlüssel nicht umbenennen.'
+            fields:
+              - { label: Schlüssel, name: key, widget: string, pattern: ['^[a-z0-9-]+$', 'Nur Kleinbuchstaben, Ziffern und Bindestriche.'] }
+              - { label: Bereich, name: label, widget: string }
+              - { label: E-Mail-Adresse, name: address, widget: string, pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', 'Bitte eine gültige E-Mail-Adresse eintragen.'] }

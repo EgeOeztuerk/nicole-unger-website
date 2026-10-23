@@ -1,0 +1,165 @@
+---
+/**
+ * Dezenter Crossfade-Slider. Ein Bild = statisches Hero.
+ * Respektiert prefers-reduced-motion (kein automatischer Wechsel) und hat
+ * eine Pause-Schaltfläche (WCAG 2.2.2).
+ */
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { useTranslations } from '../i18n/ui';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  images: { image: ImageMetadata; alt: string }[];
+  locale: Locale;
+  interval?: number;
+}
+
+const { images, locale, interval = 6500 } = Astro.props;
+const t = useTranslations(locale);
+const multiple = images.length > 1;
+---
+
+<div class="hero-slider" data-hero-slider data-interval={interval}>
+  {
+    images.map((img, i) => (
+      <div class:list={['hero-slider__slide', { 'is-active': i === 0 }]} aria-hidden={i === 0 ? undefined : 'true'} data-slide>
+        <Picture
+          src={img.image}
+          alt={img.alt}
+          formats={['avif', 'webp']}
+          widths={[640, 960, 1280, 1680, 2400]}
+          sizes="100vw"
+          loading={i === 0 ? 'eager' : 'lazy'}
+          fetchpriority={i === 0 ? 'high' : 'auto'}
+        />
+      </div>
+    ))
+  }
+  {
+    multiple && (
+      <button
+        class="hero-slider__toggle"
+        type="button"
+        aria-pressed="false"
+        data-hero-toggle
+        data-label-pause={t('hero.pause')}
+        data-label-play={t('hero.play')}
+      >
+        <span class="hero-slider__icon" aria-hidden="true" />
+        <span class="visually-hidden" data-hero-toggle-label>
+          {t('hero.pause')}
+        </span>
+      </button>
+    )
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-hero-slider]').forEach((root) => {
+    const slides = [...root.querySelectorAll<HTMLElement>('[data-slide]')];
+    const toggle = root.querySelector<HTMLButtonElement>('[data-hero-toggle]');
+    const label = root.querySelector<HTMLElement>('[data-hero-toggle-label]');
+    if (slides.length < 2 || !toggle || !label) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const interval = Number(root.dataset.interval) || 6500;
+    let index = 0;
+    let timer: number | undefined;
+    let paused = reduced.matches;
+
+    const show = (next: number) => {
+      slides[index].classList.remove('is-active');
+      slides[index].setAttribute('aria-hidden', 'true');
+      index = next % slides.length;
+      slides[index].classList.add('is-active');
+      slides[index].removeAttribute('aria-hidden');
+    };
+    const stop = () => window.clearInterval(timer);
+    const start = () => {
+      stop();
+      if (!paused) timer = window.setInterval(() => show(index + 1), interval);
+    };
+    const render = () => {
+      toggle.setAttribute('aria-pressed', String(paused));
+      toggle.classList.toggle('is-paused', paused);
+      label.textContent = (paused ? toggle.dataset.labelPlay : toggle.dataset.labelPause) ?? '';
+    };
+
+    toggle.addEventListener('click', () => {
+      paused = !paused;
+      render();
+      start();
+    });
+    reduced.addEventListener('change', (e) => {
+      paused = e.matches;
+      render();
+      start();
+    });
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+
+    render();
+    start();
+  });
+</script>
+
+<style>
+  .hero-slider {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    max-height: calc(100svh - var(--header-height) - 6rem);
+    min-height: 22rem;
+    width: 100%;
+    background: var(--color-surface-alt);
+  }
+  .hero-slider__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity var(--duration-slow) ease-in-out;
+  }
+  .hero-slider__slide.is-active {
+    opacity: 1;
+  }
+  .hero-slider__slide :global(picture) {
+    display: block;
+    height: 100%;
+  }
+  .hero-slider__slide :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+  .hero-slider__toggle {
+    position: absolute;
+    right: var(--space-md);
+    bottom: var(--space-md);
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid rgb(255 255 255 / 0.6);
+    border-radius: 50%;
+    background: rgb(20 22 23 / 0.35);
+    color: #fff;
+    backdrop-filter: blur(4px);
+  }
+  .hero-slider__toggle:focus-visible {
+    outline-color: #fff;
+  }
+  .hero-slider__icon {
+    width: 10px;
+    height: 12px;
+    border-inline: 3px solid currentColor;
+  }
+  .is-paused .hero-slider__icon {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 0 6px 10px;
+    border-color: transparent transparent transparent currentColor;
+    margin-left: 3px;
+  }
+</style>

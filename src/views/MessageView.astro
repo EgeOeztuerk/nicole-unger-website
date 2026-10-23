@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Locale } from '../i18n/config';
+import { localizePath } from '../i18n/routes';
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  text: string;
+}
+
+const { locale, title, text } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<BaseLayout title={title} locale={locale} noindex>
+  <section class="section container--narrow message">
+    <h1>{title}</h1>
+    <p class="lead">{text}</p>
+    <a class="button button--ghost" href={localizePath('home', locale)}>{t('common.backHome')}</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .message {
+    display: grid;
+    gap: var(--space-lg);
+    justify-items: start;
+    min-height: 50vh;
+    align-content: center;
+  }
+</style>

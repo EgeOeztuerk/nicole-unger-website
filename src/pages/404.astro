@@ -1,0 +1,8 @@
+---
+import MessageView from '../views/MessageView.astro';
+import { useTranslations } from '../i18n/ui';
+
+const t = useTranslations('de');
+---
+
+<MessageView locale="de" title={t('notFound.title')} text={t('notFound.text')} />

@@ -1,0 +1,157 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSlider from '../components/HeroSlider.astro';
+import type { Locale } from '../i18n/config';
+import { localizePath } from '../i18n/routes';
+import { getPage } from '../lib/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { data } = await getPage('home', 'home', locale);
+---
+
+<BaseLayout title={data.title} description={data.description} locale={locale} ogImage={data.heroImages[0]?.image} isHome>
+  <section class="hero" aria-labelledby="hero-title">
+    <HeroSlider images={data.heroImages} locale={locale} />
+    <div class="hero__text container">
+      <h1 id="hero-title">{data.headline}</h1>
+      {
+        data.disciplines.length > 0 && (
+          <ul class="hero__disciplines">
+            {data.disciplines.map((d) => (
+              <li>{d}</li>
+            ))}
+          </ul>
+        )
+      }
+      {data.intro && <p class="hero__intro lead">{data.intro}</p>}
+    </div>
+  </section>
+
+  <section class="section tiles-section" aria-label="Bereiche">
+    <ul class="tiles container">
+      {
+        data.tiles.map((tile) => (
+          <li class="tile">
+            <a class="tile__link" href={localizePath(tile.link, locale)}>
+              <div class="tile__media">
+                <Image src={tile.image} alt={tile.alt} widths={[400, 640, 900]} sizes="(min-width: 56em) 33vw, 100vw" />
+              </div>
+              <h2 class="tile__title">{tile.title}</h2>
+              <p class="tile__text">{tile.text}</p>
+              <span class="tile__more link-arrow" aria-hidden="true" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero__text {
+    padding-top: var(--space-xl);
+    display: grid;
+    gap: var(--space-md);
+  }
+  .hero__text h1 {
+    font-size: var(--text-display);
+    line-height: 1;
+  }
+  .hero__disciplines {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0;
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .hero__disciplines li:not(:last-child)::after {
+    content: '';
+    display: inline-block;
+    width: 1.5rem;
+    height: 1px;
+    margin-inline: 0.85rem;
+    vertical-align: middle;
+    background: var(--color-line-strong);
+  }
+  .hero__intro {
+    max-width: 40ch;
+    color: var(--color-text-muted);
+  }
+  @media (min-width: 56em) {
+    .hero__text {
+      grid-template-columns: 1fr minmax(0, 26rem);
+      align-items: end;
+      column-gap: var(--space-xl);
+    }
+    .hero__disciplines {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .hero__intro {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      align-self: end;
+    }
+  }
+
+  .tiles {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-xl) var(--space-lg);
+  }
+  @media (min-width: 56em) {
+    .tiles {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .tile:nth-child(2) {
+      margin-top: var(--space-xl);
+    }
+  }
+  .tile__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+  .tile__media {
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    margin-bottom: var(--space-md);
+    background: var(--color-surface-alt);
+  }
+  .tile__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 900ms var(--ease);
+  }
+  .tile__link:hover .tile__media :global(img) {
+    transform: scale(1.03);
+  }
+  .tile__title {
+    font-size: var(--text-xl);
+    transition: color var(--duration) var(--ease);
+  }
+  .tile__link:hover .tile__title {
+    color: var(--color-accent);
+  }
+  .tile__text {
+    margin-top: var(--space-xs);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    max-width: 38ch;
+  }
+  .tile__more {
+    margin-top: var(--space-sm);
+    color: var(--color-accent);
+  }
+</style>

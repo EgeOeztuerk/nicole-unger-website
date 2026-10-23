@@ -1,0 +1,188 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import type { Locale } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+import { getPage, getSettings } from '../lib/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const page = await getPage('about', 'ueber-mich', locale);
+const { data } = page;
+const { Content } = await render(page);
+const settings = await getSettings();
+---
+
+<BaseLayout title={data.title} description={data.description} locale={locale} current="about" ogImage={data.portrait.image}>
+  <section class="section about" aria-labelledby="about-title">
+    <div class="container about__grid">
+      <div class="about__media">
+        <Image src={data.portrait.image} alt={data.portrait.alt} widths={[480, 720, 960]} sizes="(min-width: 56em) 40vw, 100vw" loading="eager" />
+      </div>
+      <div class="about__text">
+        {data.kicker && <span class="kicker">{data.kicker}</span>}
+        <h1 id="about-title">{data.title}</h1>
+        <p class="lead">{data.lead}</p>
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" aria-labelledby="engagement-title">
+    <div class="container engagement">
+      <div>
+        <h2 id="engagement-title">{data.engagement.heading}</h2>
+        {data.engagement.text && <p class="muted">{data.engagement.text}</p>}
+      </div>
+      {
+        data.engagement.items.length > 0 && (
+          <ul class="engagement__list">
+            {data.engagement.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section contact" id="kontakt" aria-labelledby="contact-title">
+    <div class="container contact__grid">
+      <div class="contact__aside">
+        <h2 id="contact-title">{data.contact.heading}</h2>
+        <p class="muted">{data.contact.intro}</p>
+
+        <h3>{data.contact.mailHeading}</h3>
+        <dl class="mails">
+          {
+            settings.emails.map((m) => (
+              <div>
+                <dt>{m.label}</dt>
+                <dd>
+                  <a href={`mailto:${m.address}`}>{m.address}</a>
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <div class="acting-note">
+          <p>{t('contact.actingNote')}</p>
+          <a class="link-arrow" href={settings.agency.url} target="_blank" rel="noopener">
+            {settings.agency.name}<span class="visually-hidden"> {t('common.externalLink')}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact__form">
+        <h3>{data.contact.formHeading}</h3>
+        <ContactForm locale={locale} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about__grid {
+    display: grid;
+    gap: var(--space-xl);
+  }
+  @media (min-width: 56em) {
+    .about__grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+    .about__media {
+      position: sticky;
+      top: calc(var(--header-height) + var(--space-lg));
+    }
+  }
+  .about__media :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+  .about__text .lead {
+    margin-block: var(--space-md) var(--space-lg);
+  }
+
+  .engagement {
+    display: grid;
+    gap: var(--space-lg);
+  }
+  @media (min-width: 56em) {
+    .engagement {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+  .engagement h2 {
+    margin-bottom: var(--space-sm);
+  }
+  .engagement__list {
+    list-style: none;
+    padding: 0;
+  }
+  .engagement__list li {
+    padding-block: var(--space-sm);
+    border-bottom: var(--border);
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+  }
+  .engagement__list li:first-child {
+    border-top: var(--border);
+  }
+
+  .contact__grid {
+    display: grid;
+    gap: var(--space-xl);
+  }
+  @media (min-width: 64em) {
+    .contact__grid {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+      gap: var(--space-2xl);
+    }
+  }
+  .contact__aside h2 {
+    margin-bottom: var(--space-sm);
+  }
+  .contact__aside h3,
+  .contact__form h3 {
+    font-size: var(--text-lg);
+    margin: var(--space-lg) 0 var(--space-sm);
+  }
+  .contact__form h3 {
+    margin-top: 0;
+  }
+  @media (max-width: 63.99em) {
+    .contact__form h3 {
+      margin-top: var(--space-md);
+    }
+  }
+  .mails div {
+    padding-block: 0.6rem;
+    border-bottom: var(--border);
+  }
+  .mails dt {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+  .mails dd {
+    overflow-wrap: anywhere;
+  }
+  .acting-note {
+    margin-top: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    background: var(--color-surface-alt);
+    font-size: var(--text-sm);
+  }
+</style>

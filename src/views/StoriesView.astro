@@ -1,0 +1,123 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import type { Locale } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+import { getLocalized, getPage } from '../lib/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const { data } = await getPage('storiesPage', 'stories', locale);
+const stories = (await getLocalized('stories', locale)).sort(
+  (a, b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title),
+);
+---
+
+<BaseLayout title={data.title} description={data.description} locale={locale} current="stories">
+  <PageIntro title={data.title} kicker={data.kicker} lead={data.intro} />
+
+  <section class="section stories-section" aria-label={data.title}>
+    <div class="container">
+      {
+        stories.length === 0 ? (
+          <p class="muted">{t('stories.empty')}</p>
+        ) : (
+          <ul class="stories">
+            {stories.map(({ data: s }) => (
+              <li class:list={['story', { 'story--image': !!s.image }]}>
+                {s.image && (
+                  <div class="story__media">
+                    <Image src={s.image} alt={s.alt ?? ''} widths={[400, 640, 900]} sizes="(min-width: 56em) 30vw, 100vw" />
+                  </div>
+                )}
+                <div class="story__body">
+                  <p class="story__meta">
+                    <span>{s.kind}</span>
+                    {s.year && <span>{s.year}</span>}
+                    {s.status && <span>{s.status}</span>}
+                  </p>
+                  <h2 class="story__title">{s.title}</h2>
+                  <p class="story__logline">{s.logline}</p>
+                  {s.award && <p class="story__award">{s.award}</p>}
+                  {s.linkUrl && (
+                    <a class="link-arrow" href={s.linkUrl} target="_blank" rel="noopener">
+                      {s.linkLabel ?? s.linkUrl}
+                      <span class="visually-hidden"> {t('common.externalLink')}</span>
+                    </a>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .stories-section {
+    padding-top: var(--space-lg);
+  }
+  .stories {
+    list-style: none;
+    padding: 0;
+    border-top: 1px solid var(--color-line-strong);
+  }
+  .story {
+    display: grid;
+    gap: var(--space-lg);
+    padding-block: var(--space-xl);
+    border-bottom: var(--border);
+  }
+  @media (min-width: 56em) {
+    .story {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      gap: var(--space-2xl);
+    }
+    .story:not(.story--image) .story__body {
+      grid-column: 2;
+    }
+  }
+  .story__media :global(img) {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+  .story__body {
+    display: grid;
+    gap: var(--space-sm);
+    justify-items: start;
+    align-content: start;
+  }
+  .story__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0;
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .story__meta span:not(:last-child)::after {
+    content: '·';
+    margin-inline: 0.6rem;
+    color: var(--color-line-strong);
+  }
+  .story__title {
+    font-size: var(--text-2xl);
+  }
+  .story__logline {
+    max-width: var(--measure);
+    color: var(--color-text-muted);
+  }
+  .story__award {
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+</style>

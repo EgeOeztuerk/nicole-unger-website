@@ -1,0 +1,24 @@
+{
+  "siteName": "Nicole Unger",
+  "tagline": "Schauspiel · Sprechen · Stoffentwicklung",
+  "agency": {
+    "name": "Agentur LM",
+    "url": "https://agenturlm.de/actors/nicole-u-4/",
+    "email": "",
+    "phone": ""
+  },
+  "profiles": [
+    { "label": "Agentur LM", "url": "https://agenturlm.de/actors/nicole-u-4/" },
+    { "label": "Filmmakers", "url": "https://www.filmmakers.eu/de/actors/nicole-unger" },
+    { "label": "Crew United", "url": "https://www.crew-united.com/de/PLATZHALTER" },
+    { "label": "e-talenta", "url": "https://www.e-talenta.eu/members/profile/PLATZHALTER" },
+    { "label": "Spotlight", "url": "https://www.spotlight.com/PLATZHALTER" },
+    { "label": "IMDb", "url": "https://www.imdb.com/name/PLATZHALTER/" }
+  ],
+  "emails": [
+    { "key": "info", "label": "Allgemein", "address": "info@nicoleunger-creative.de" },
+    { "key": "lektorat", "label": "Lektorat & Script Consulting", "address": "lektorat@nicoleunger-creative.de" },
+    { "key": "stoffe", "label": "Stoffentwicklung", "address": "stoffe@nicoleunger-creative.de" },
+    { "key": "sprechen", "label": "Sprechen & Audio", "address": "sprechen@nicoleunger-creative.de" }
+  ]
+}

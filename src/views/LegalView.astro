@@ -1,0 +1,30 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Locale } from '../i18n/config';
+import { getPage } from '../lib/content';
+
+interface Props {
+  locale: Locale;
+  name: 'impressum' | 'datenschutz';
+}
+
+const { locale, name } = Astro.props;
+const page = await getPage('legal', name, locale);
+const { Content } = await render(page);
+---
+
+<BaseLayout title={page.data.title} description={page.data.description} locale={locale} current={name === 'impressum' ? 'imprint' : 'privacy'}>
+  <article class="section container--narrow legal">
+    <h1>{page.data.title}</h1>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal h1 {
+    margin-bottom: var(--space-xl);
+  }
+</style>
