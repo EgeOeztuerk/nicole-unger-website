@@ -7,7 +7,7 @@
 # Variante A (Standard): GitHub-Backend + Netlify als OAuth-Provider.
 backend:
   name: github
-  repo: DEIN-GITHUB-NAME/nicole-unger-website # <- nach dem Push anpassen
+  repo: EgeOeztuerk/nicole-unger-website
   branch: main
   commit_messages:
     create: 'Neu: {{collection}} „{{slug}}“'
