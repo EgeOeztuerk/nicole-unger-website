@@ -1,11 +1,13 @@
 ---
 title: Schauspiel
-description: Showreel, Headshots und Vita der Schauspielerin Nicole Unger – Kino, Fernsehen und Theater. Anfragen über die Agentur LM.
+description: Showreel, Headshots und Vita der Schauspielerin Nicole Unger –
+  Kino, Fernsehen und Theater. Anfragen über die Agentur LM.
 kicker: Film · Fernsehen · Theater
-intro: Präsenz vor der Kamera und auf der Bühne – mit dem genauen Blick der Dramaturgin für Figur und Geschichte.
+intro: Präsenz vor der Kamera und auf der Bühne – mit dem genauen Blick der
+  Dramaturgin für Figur und Geschichte.
 showreel:
   heading: Showreel 2026
-  youtubeId: PLATZHALTER
+  youtubeId: CFqlovhWIw4
   poster: /src/assets/uploads/showreel-poster.jpg
   posterAlt: Platzhalter – Standbild aus dem Showreel von Nicole Unger
 galleryHeading: Headshots & Szenenbilder
