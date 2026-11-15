@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
-import YouTubeConsent from '../components/YouTubeConsent.astro';
+import FilmmakersEmbed from '../components/FilmmakersEmbed.astro';
 import Gallery from '../components/Gallery.astro';
 import VitaTables from '../components/VitaTables.astro';
 import type { Locale } from '../i18n/config';
@@ -22,16 +22,25 @@ const settings = await getSettings();
 <BaseLayout title={data.title} description={data.description} locale={locale} current="acting" ogImage={data.gallery[0]?.image}>
   <PageIntro title={data.title} kicker={data.kicker} lead={data.intro} />
 
-  <section class="section showreel" aria-labelledby="showreel-title">
+  <section class="section reels" aria-labelledby="reels-title">
     <div class="container">
-      <YouTubeConsent
-        videoId={data.showreel.youtubeId}
-        title={data.showreel.heading}
-        poster={data.showreel.poster}
-        posterAlt={data.showreel.posterAlt}
-        locale={locale}
-      />
-      <h2 id="showreel-title" class="showreel__label kicker">{data.showreel.heading}</h2>
+      <h2 id="reels-title" class="visually-hidden">{data.reelsHeading}</h2>
+      <ul class="reels__list">
+        {
+          data.reels.map((reel, i) => (
+            <li class:list={['reels__item', { 'reels__item--featured': i === 0 }]}>
+              <FilmmakersEmbed
+                url={reel.url}
+                title={reel.title}
+                description={reel.description}
+                language={reel.language}
+                locale={locale}
+                featured={i === 0}
+              />
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
@@ -53,24 +62,41 @@ const settings = await getSettings();
     </div>
   </section>
 
-  <section class="section" aria-labelledby="booking-title">
+  <section class="section" id="buchung" aria-labelledby="booking-title">
     <div class="container booking">
       <div class="booking__main">
         <span class="kicker">{settings.agency.name}</span>
         <h2 id="booking-title">{data.booking.heading}</h2>
         <p>{data.booking.text}</p>
-        <a class="button" href={settings.agency.url} target="_blank" rel="noopener">
-          {data.booking.linkLabel}<span class="visually-hidden"> {t('common.externalLink')}</span>
-        </a>
         {
-          (settings.agency.email || settings.agency.phone) && (
-            <p class="booking__contact muted">
-              {settings.agency.email && <a href={`mailto:${settings.agency.email}`}>{settings.agency.email}</a>}
-              {settings.agency.email && settings.agency.phone && ' · '}
-              {settings.agency.phone && <a href={`tel:${settings.agency.phone.replace(/\s/g, '')}`}>{settings.agency.phone}</a>}
-            </p>
+          settings.agency.email && (
+            <a class="button" href={`mailto:${settings.agency.email}`}>
+              {data.booking.linkLabel}
+            </a>
           )
         }
+        <dl class="booking__contact">
+          {
+            settings.agency.email && (
+              <div>
+                <dt>{t('common.email')}</dt>
+                <dd>
+                  <a href={`mailto:${settings.agency.email}`}>{settings.agency.email}</a>
+                </dd>
+              </div>
+            )
+          }
+          {
+            settings.agency.phone && (
+              <div>
+                <dt>{t('common.phone')}</dt>
+                <dd>
+                  <a href={`tel:${settings.agency.phone.replace(/\s/g, '')}`}>{settings.agency.phone}</a>
+                </dd>
+              </div>
+            )
+          }
+        </dl>
       </div>
       <div class="booking__profiles">
         <h3>{data.profilesHeading}</h3>
@@ -92,13 +118,22 @@ const settings = await getSettings();
 </BaseLayout>
 
 <style>
-  .showreel {
+  .reels {
     padding-top: 0;
   }
-  .showreel__label {
-    margin-top: var(--space-sm);
-    margin-bottom: 0;
-    color: var(--color-text-muted);
+  .reels__list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-md);
+  }
+  @media (min-width: 48em) {
+    .reels__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .reels__item--featured {
+      grid-column: 1 / -1;
+    }
   }
   .booking {
     display: grid;
@@ -116,7 +151,17 @@ const settings = await getSettings();
     margin-bottom: 0;
   }
   .booking__contact {
+    display: grid;
+    gap: 0.35rem;
     font-size: var(--text-sm);
+  }
+  .booking__contact div {
+    display: flex;
+    gap: 0.6rem;
+  }
+  .booking__contact dt {
+    min-width: 4.5rem;
+    color: var(--color-text-muted);
   }
   .booking__profiles h3 {
     font-family: var(--font-sans);

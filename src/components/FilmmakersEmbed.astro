@@ -1,0 +1,174 @@
+---
+/**
+ * Zwei-Klick-Einbindung des Filmmakers-Players (Video oder Audio).
+ * Zuerst wird nur eine lokale Vorschau-Kachel gezeigt. Erst nach Klick lädt der
+ * Player von filmmakers.eu als iframe – Besucher bleiben dabei auf der Seite.
+ */
+import type { Locale } from '../i18n/config';
+import { localizePath } from '../i18n/routes';
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  url: string;
+  title: string;
+  locale: Locale;
+  kind?: 'video' | 'audio';
+  language?: 'de' | 'en' | 'fr';
+  description?: string;
+  featured?: boolean;
+}
+
+const { url, title, locale, kind = 'video', language, description, featured = false } = Astro.props;
+const t = useTranslations(locale);
+
+// Player-Oberfläche in Seitensprache (Filmmakers kennt DE und EN).
+const playerLang = locale === 'de' ? 'de' : 'en';
+const embed = new URL(url.replace(/^https:\/\/www\.filmmakers\.eu\/\w{2}\//, `https://www.filmmakers.eu/${playerLang}/`));
+embed.search = new URLSearchParams({ autoplay: 'true', background_color: 'none', iframe: 'v2', playlist: 'h' }).toString();
+---
+
+<div class:list={['fm', `fm--${kind}`, { 'fm--featured': featured }]} data-fm data-src={embed.toString()} data-title={title}>
+  <div class="fm__card">
+    <div class="fm__info">
+      {language && <span class="fm__lang">{t(`embed.lang.${language}`)}</span>}
+      <p class="fm__title">{title}</p>
+      {description && <p class="fm__desc">{description}</p>}
+    </div>
+    <button class="fm__play" type="button" data-fm-load>
+      <span class="fm__icon" aria-hidden="true"></span>
+      <span>{kind === 'audio' ? t('embed.loadAudio') : t('embed.loadVideo')}<span class="visually-hidden">: {title}</span></span>
+    </button>
+    <p class="fm__notice">
+      {t('embed.notice')}
+      <a href={localizePath('privacy', locale)}>{t('embed.privacyLink')}</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-fm]').forEach((root) => {
+    root.querySelector<HTMLButtonElement>('[data-fm-load]')?.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = root.dataset.src ?? '';
+      iframe.title = root.dataset.title ?? 'Filmmakers';
+      iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.className = 'fm__frame';
+      root.replaceChildren(iframe);
+      root.classList.add('is-loaded');
+      iframe.focus();
+    });
+  });
+</script>
+
+<style>
+  .fm {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 90% at 85% 10%, rgb(255 255 255 / 0.08), transparent 60%),
+      var(--color-inverse-bg);
+    color: #fff;
+  }
+  .fm--audio {
+    aspect-ratio: auto;
+    min-height: 16rem;
+  }
+  /* Geladener Player: Video (16:9) plus Titelzeile und Playlist darunter */
+  .fm--video.is-loaded {
+    aspect-ratio: auto;
+    padding-bottom: calc(56.25% + 12rem);
+  }
+  .fm--audio.is-loaded {
+    height: 23rem;
+    background: #fff;
+  }
+  .fm__card {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: clamp(1rem, 3vw, 2rem);
+  }
+  .fm__info {
+    display: grid;
+    gap: 0.35rem;
+    justify-items: start;
+  }
+  .fm__lang {
+    padding: 0.1rem 0.6rem;
+    border: 1px solid rgb(255 255 255 / 0.45);
+    border-radius: 999px;
+    font-size: var(--text-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .fm__title {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+  }
+  .fm--featured .fm__title {
+    font-size: var(--text-2xl);
+  }
+  .fm__desc {
+    font-size: var(--text-sm);
+    color: rgb(255 255 255 / 0.8);
+  }
+  .fm__play {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.75rem 1.35rem;
+    border: 1px solid rgb(255 255 255 / 0.8);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.06);
+    color: #fff;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    transition: background var(--duration) var(--ease);
+  }
+  .fm__play:hover {
+    background: rgb(255 255 255 / 0.18);
+  }
+  .fm__play:focus-visible,
+  .fm__notice a:focus-visible {
+    outline-color: #fff;
+  }
+  .fm__icon {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7px 0 7px 12px;
+    border-color: transparent transparent transparent currentColor;
+  }
+  .fm__notice {
+    max-width: 60ch;
+    font-size: var(--text-xs);
+    line-height: 1.5;
+    color: rgb(255 255 255 / 0.75);
+  }
+  .fm__notice a {
+    color: #fff;
+  }
+  @media (max-width: 36em) {
+    .fm:not(.is-loaded) {
+      aspect-ratio: auto;
+      min-height: 17rem;
+    }
+  }
+  .fm :global(.fm__frame) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #fff;
+  }
+</style>

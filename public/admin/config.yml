@@ -41,20 +41,20 @@ slug:
 editor:
   preview: false
 
-# Mehrsprachigkeit vorbereitet: weitere Sprachen hier ergänzen (z. B. [de, en, fr]).
-# Listen-Sammlungen liegen unter <ordner>/<sprache>/<eintrag>.md.
+# Mehrsprachigkeit: Listen-Sammlungen liegen unter <ordner>/<sprache>/<eintrag>.md.
+# Fehlt eine Übersetzung, zeigt die Website automatisch die deutsche Fassung.
 i18n:
   structure: multiple_folders
-  locales: [de]
+  locales: [de, en, fr]
   default_locale: de
 
 collections:
   # =========================================================================
-  # Einzelseiten (Deutsch). Für EN/FR später eine Kopie dieser Sammlung mit
-  # Pfaden src/content/pages/en/… bzw. …/fr/… anlegen.
+  # Einzelseiten (Deutsch). Die Felder werden per YAML-Anker (&…/*…) für die
+  # englischen und französischen Seiten weiterverwendet (siehe unten).
   # =========================================================================
   - name: seiten
-    label: Seiten
+    label: Seiten (Deutsch)
     label_singular: Seite
     description: Texte und Bilder der einzelnen Seiten.
     delete: false
@@ -62,7 +62,7 @@ collections:
       - name: home
         label: Startseite
         file: src/content/pages/de/home.md
-        fields:
+        fields: &f_home
           - { label: Seitentitel (Browser-Tab & Google), name: title, widget: string }
           - { label: Kurzbeschreibung für Google (max. 200 Zeichen), name: description, widget: text, required: false }
           - { label: Überschrift, name: headline, widget: string }
@@ -106,23 +106,33 @@ collections:
       - name: schauspiel
         label: Schauspiel
         file: src/content/pages/de/schauspiel.md
-        fields:
+        fields: &f_schauspiel
           - { label: Seitentitel, name: title, widget: string }
           - { label: Kurzbeschreibung für Google, name: description, widget: text, required: false }
           - { label: Dachzeile, name: kicker, widget: string, required: false }
           - { label: Einleitung, name: intro, widget: text, required: false }
-          - label: Showreel
-            name: showreel
-            widget: object
+          - { label: Überschrift Videos (nur für Screenreader), name: reelsHeading, widget: string }
+          - label: Videos (Filmmakers)
+            name: reels
+            widget: list
+            min: 1
+            summary: '{{fields.title}} ({{fields.language}})'
+            hint: Das erste Video wird groß angezeigt. Videos werden direkt auf der Seite abgespielt (Zwei-Klick-Lösung).
             fields:
-              - { label: Überschrift, name: heading, widget: string }
-              - label: YouTube-Video-ID
-                name: youtubeId
+              - { label: Titel, name: title, widget: string }
+              - label: Sprache des Videos
+                name: language
+                widget: select
+                options:
+                  - { label: Deutsch, value: de }
+                  - { label: Englisch, value: en }
+                  - { label: Französisch, value: fr }
+              - { label: Kurzbeschreibung, name: description, widget: string, required: false }
+              - label: Filmmakers-Link
+                name: url
                 widget: string
-                hint: 'Die 11 Zeichen nach „watch?v=“ in der YouTube-Adresse, z. B. bei youtube.com/watch?v=AbCdEfGhIjK → AbCdEfGhIjK. „PLATZHALTER“ zeigt „Showreel folgt“.'
-                pattern: ['^[\w-]{11}$', 'Bitte genau die 11-stellige YouTube-ID eintragen.']
-              - { label: Vorschaubild, name: poster, widget: image, choose_url: false }
-              - { label: Bildbeschreibung (Alternativtext), name: posterAlt, widget: string }
+                hint: 'Link zum Video auf Filmmakers kopieren, z. B. https://www.filmmakers.eu/de/actors/nicole-unger/video/261902'
+                pattern: ['^https://www\.filmmakers\.eu/\w{2}/actors/[\w-]+/video/\d+/?$', 'Bitte den Filmmakers-Link zum Video eintragen (…/actors/name/video/nummer).']
           - { label: Überschrift Galerie, name: galleryHeading, widget: string }
           - label: Galerie (Headshots & Szenenbilder)
             name: gallery
@@ -140,12 +150,12 @@ collections:
             fields:
               - { label: Überschrift, name: heading, widget: string }
               - { label: Text, name: text, widget: text }
-              - { label: Beschriftung Agentur-Button, name: linkLabel, widget: string }
+              - { label: Beschriftung E-Mail-Button, name: linkLabel, widget: string, hint: 'Der Button öffnet eine E-Mail an die Agentur (Adresse unter „Einstellungen“).' }
 
       - name: sprechen
         label: Sprechen
         file: src/content/pages/de/sprechen.md
-        fields:
+        fields: &f_sprechen
           - { label: Seitentitel, name: title, widget: string }
           - { label: Kurzbeschreibung für Google, name: description, widget: text, required: false }
           - { label: Dachzeile, name: kicker, widget: string, required: false }
@@ -157,6 +167,18 @@ collections:
             fields:
               - { label: Bild, name: image, widget: image, choose_url: false }
               - { label: Bildbeschreibung (Alternativtext), name: alt, widget: string }
+          - label: Hörproben-Reel (Filmmakers)
+            name: reel
+            widget: object
+            required: false
+            fields:
+              - { label: Überschrift, name: heading, widget: string }
+              - { label: Kurzbeschreibung, name: text, widget: string, required: false }
+              - label: Filmmakers-Link
+                name: url
+                widget: string
+                hint: 'z. B. https://www.filmmakers.eu/de/actors/nicole-unger/audio/146232'
+                pattern: ['^https://www\.filmmakers\.eu/\w{2}/actors/[\w-]+/audio/\d+/?$', 'Bitte den Filmmakers-Link zum Audio eintragen (…/actors/name/audio/nummer).']
           - { label: Überschrift Hörproben, name: loungeHeading, widget: string, hint: 'Die Hörproben selbst pflegen Sie unter „Hörproben“.' }
           - { label: Überschrift Stimmmerkmale, name: traitsHeading, widget: string }
           - label: Stimmmerkmale
@@ -184,7 +206,7 @@ collections:
       - name: dramaturgie
         label: Dramaturgie & Lektorat
         file: src/content/pages/de/dramaturgie.md
-        fields:
+        fields: &f_dramaturgie
           - { label: Seitentitel, name: title, widget: string }
           - { label: Kurzbeschreibung für Google, name: description, widget: text, required: false }
           - { label: Dachzeile, name: kicker, widget: string, required: false }
@@ -228,7 +250,7 @@ collections:
       - name: stories
         label: Stories (Seitentexte)
         file: src/content/pages/de/stories.md
-        fields:
+        fields: &f_stories
           - { label: Seitentitel, name: title, widget: string }
           - { label: Kurzbeschreibung für Google, name: description, widget: text, required: false }
           - { label: Dachzeile, name: kicker, widget: string, required: false }
@@ -237,7 +259,7 @@ collections:
       - name: ueber-mich
         label: Über mich & Kontakt
         file: src/content/pages/de/ueber-mich.md
-        fields:
+        fields: &f_ueber_mich
           - { label: Seitentitel, name: title, widget: string }
           - { label: Kurzbeschreibung für Google, name: description, widget: text, required: false }
           - { label: Dachzeile, name: kicker, widget: string, required: false }
@@ -268,16 +290,94 @@ collections:
       - name: impressum
         label: Impressum
         file: src/content/pages/de/impressum.md
-        fields:
+        fields: &f_impressum
           - { label: Seitentitel, name: title, widget: string }
           - { label: Text, name: body, widget: markdown }
 
       - name: datenschutz
         label: Datenschutzerklärung
         file: src/content/pages/de/datenschutz.md
-        fields:
+        fields: &f_datenschutz
           - { label: Seitentitel, name: title, widget: string }
           - { label: Text, name: body, widget: markdown }
+
+  - name: seiten-en
+    label: Pages (English)
+    label_singular: Seite
+    description: Englische Seiten – gleiche Felder wie bei den deutschen Seiten.
+    delete: false
+    files:
+      - name: home-en
+        label: Startseite
+        file: src/content/pages/en/home.md
+        fields: *f_home
+      - name: schauspiel-en
+        label: Schauspiel
+        file: src/content/pages/en/schauspiel.md
+        fields: *f_schauspiel
+      - name: sprechen-en
+        label: Sprechen
+        file: src/content/pages/en/sprechen.md
+        fields: *f_sprechen
+      - name: dramaturgie-en
+        label: Dramaturgie & Lektorat
+        file: src/content/pages/en/dramaturgie.md
+        fields: *f_dramaturgie
+      - name: stories-en
+        label: Stories (Seitentexte)
+        file: src/content/pages/en/stories.md
+        fields: *f_stories
+      - name: ueber-mich-en
+        label: Über mich & Kontakt
+        file: src/content/pages/en/ueber-mich.md
+        fields: *f_ueber_mich
+      - name: impressum-en
+        label: Impressum
+        file: src/content/pages/en/impressum.md
+        fields: *f_impressum
+      - name: datenschutz-en
+        label: Datenschutzerklärung
+        file: src/content/pages/en/datenschutz.md
+        fields: *f_datenschutz
+
+  - name: seiten-fr
+    label: Pages (Français)
+    label_singular: Seite
+    description: Französische Seiten – gleiche Felder wie bei den deutschen Seiten.
+    delete: false
+    files:
+      - name: home-fr
+        label: Startseite
+        file: src/content/pages/fr/home.md
+        fields: *f_home
+      - name: schauspiel-fr
+        label: Schauspiel
+        file: src/content/pages/fr/schauspiel.md
+        fields: *f_schauspiel
+      - name: sprechen-fr
+        label: Sprechen
+        file: src/content/pages/fr/sprechen.md
+        fields: *f_sprechen
+      - name: dramaturgie-fr
+        label: Dramaturgie & Lektorat
+        file: src/content/pages/fr/dramaturgie.md
+        fields: *f_dramaturgie
+      - name: stories-fr
+        label: Stories (Seitentexte)
+        file: src/content/pages/fr/stories.md
+        fields: *f_stories
+      - name: ueber-mich-fr
+        label: Über mich & Kontakt
+        file: src/content/pages/fr/ueber-mich.md
+        fields: *f_ueber_mich
+      - name: impressum-fr
+        label: Impressum
+        file: src/content/pages/fr/impressum.md
+        fields: *f_impressum
+      - name: datenschutz-fr
+        label: Datenschutzerklärung
+        file: src/content/pages/fr/datenschutz.md
+        fields: *f_datenschutz
 
   # =========================================================================
   # Listen-Sammlungen
@@ -353,9 +453,10 @@ collections:
         widget: select
         i18n: duplicate
         options:
-          - { label: Hörbuch & Literarisches, value: hoerbuch }
-          - { label: Synchron & Voiceover, value: synchron }
-          - { label: Werbung & Dokumentation, value: werbung }
+          - { label: Gesang, value: gesang }
+          - { label: Bairisch, value: bayerisch }
+          - { label: 'Hörbuch, Kinderbuch & Trickstimmen', value: hoerbuch }
+          - { label: Werbung, value: werbung }
       - label: Sprache(n)
         name: languages
         widget: select
@@ -424,13 +525,13 @@ collections:
         format: json
         fields:
           - { label: Name der Website, name: siteName, widget: string }
-          - { label: Unterzeile im Kopfbereich, name: tagline, widget: string }
+          - { label: Unterzeile im Kopfbereich (Deutsch), name: tagline, widget: string, hint: 'Die englische und französische Unterzeile steht in src/i18n/ui.ts.' }
           - label: Agentur (Schauspiel-Anfragen)
             name: agency
             widget: object
             fields:
               - { label: Name, name: name, widget: string }
-              - { label: Profil-Adresse (URL), name: url, widget: string, pattern: ['^https?://.+', 'Bitte eine vollständige Adresse mit https:// eintragen.'] }
+              - { label: Website (URL), name: url, widget: string, pattern: ['^https?://.+', 'Bitte eine vollständige Adresse mit https:// eintragen.'] }
               - { label: E-Mail, name: email, widget: string, required: false }
               - { label: Telefon, name: phone, widget: string, required: false }
           - label: Profile & Datenbanken (Kopf- und Fußbereich)

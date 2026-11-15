@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
 import AudioLounge from '../components/AudioLounge.astro';
+import FilmmakersEmbed from '../components/FilmmakersEmbed.astro';
 import type { Locale } from '../i18n/config';
 import { localizePath } from '../i18n/routes';
 import { useTranslations } from '../i18n/ui';
@@ -44,6 +45,13 @@ const mail = emailFor(settings, data.contact.emailKey);
         <div class="section-head">
           <h2 id="lounge-title">{data.loungeHeading}</h2>
         </div>
+        {
+          data.reel && (
+            <div class="voice-reel">
+              <FilmmakersEmbed url={data.reel.url} title={data.reel.heading} description={data.reel.text} kind="audio" locale={locale} />
+            </div>
+          )
+        }
         <AudioLounge samples={samples} locale={locale} headingId="lounge-title" />
       </div>
 
@@ -76,6 +84,9 @@ const mail = emailFor(settings, data.contact.emailKey);
     width: 100%;
     aspect-ratio: 21 / 9;
     object-fit: cover;
+  }
+  .voice-reel {
+    margin-bottom: var(--space-xl);
   }
   .voice-layout {
     display: grid;

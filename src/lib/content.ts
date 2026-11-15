@@ -1,5 +1,5 @@
 import { getCollection, getEntry, type CollectionKey } from 'astro:content';
-import type { Locale } from '../i18n/config';
+import { defaultLocale, type Locale } from '../i18n/config';
 
 /** Lädt eine Einzelseite (z. B. 'home') für die gegebene Sprache. */
 export async function getPage<C extends CollectionKey>(collection: C, name: string, locale: Locale) {
@@ -8,9 +8,19 @@ export async function getPage<C extends CollectionKey>(collection: C, name: stri
   return entry;
 }
 
-/** Alle Einträge einer Listen-Sammlung in der gegebenen Sprache. */
-export function getLocalized<C extends CollectionKey>(collection: C, locale: Locale) {
-  return getCollection(collection, ({ id }) => id.startsWith(`${locale}/`));
+/**
+ * Alle Einträge einer Listen-Sammlung in der gegebenen Sprache.
+ * Fehlt die Übersetzung eines Eintrags, wird die deutsche Fassung gezeigt –
+ * so bleiben Listen in EN/FR vollständig, auch wenn noch nicht alles übersetzt ist.
+ */
+export async function getLocalized<C extends CollectionKey>(collection: C, locale: Locale) {
+  const all = await getCollection(collection);
+  const key = (id: string) => id.slice(id.indexOf('/') + 1);
+  const own = all.filter(({ id }) => id.startsWith(`${locale}/`));
+  if (locale === defaultLocale) return own;
+  const translated = new Set(own.map(({ id }) => key(id)));
+  const fallback = all.filter(({ id }) => id.startsWith(`${defaultLocale}/`) && !translated.has(key(id)));
+  return [...own, ...fallback];
 }
 
 export async function getSettings() {

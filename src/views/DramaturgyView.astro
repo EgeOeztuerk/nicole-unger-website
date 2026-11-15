@@ -24,7 +24,7 @@ const contactHref = `${localizePath('about', locale)}?anliegen=lektorat#kontakt`
 <BaseLayout title={data.title} description={data.description} locale={locale} current="dramaturgy" ogImage={data.image?.image}>
   <PageIntro title={data.title} kicker={data.kicker} lead={data.lead} />
 
-  <section class="section profile" aria-label="Profil">
+  <section class="section profile" aria-label={data.kicker ?? data.title}>
     <div class="container profile__grid">
       <div class="profile__text">
         <div class="prose">

@@ -2,18 +2,16 @@
   "siteName": "Nicole Unger",
   "tagline": "Schauspiel · Sprechen · Stoffentwicklung",
   "agency": {
-    "name": "Agentur LM",
-    "url": "https://agenturlm.de/actors/nicole-u-4/",
-    "email": "",
-    "phone": ""
+    "name": "Agentur Lieblingsmensch",
+    "url": "https://www.agenturlm.de",
+    "email": "mail@agenturlm.de",
+    "phone": "+49 151 1524 5292"
   },
   "profiles": [
-    { "label": "Agentur LM", "url": "https://agenturlm.de/actors/nicole-u-4/" },
     { "label": "Filmmakers", "url": "https://www.filmmakers.eu/de/actors/nicole-unger" },
-    { "label": "Crew United", "url": "https://www.crew-united.com/de/PLATZHALTER" },
-    { "label": "e-talenta", "url": "https://www.e-talenta.eu/members/profile/PLATZHALTER" },
-    { "label": "Spotlight", "url": "https://www.spotlight.com/PLATZHALTER" },
-    { "label": "IMDb", "url": "https://www.imdb.com/name/PLATZHALTER/" }
+    { "label": "Castforward / e-TALENTA", "url": "https://www.castforward.de/members/profile/nicole-unger" },
+    { "label": "Crew United", "url": "https://www.crew-united.com/de/Nicole-Unger_47370.html" },
+    { "label": "IMDb", "url": "https://www.imdb.me/NicoleUnger" }
   ],
   "emails": [
     { "key": "info", "label": "Allgemein", "address": "info@nicoleunger-creative.de" },

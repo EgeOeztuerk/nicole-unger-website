@@ -20,9 +20,9 @@ Diese Website setzt keine Cookies und verwendet keine Analyse- oder Tracking-Die
 
 Wenn Sie das Kontaktformular nutzen, werden Ihre Angaben (Name, E-Mail-Adresse, Anliegen, Nachricht) über den Formulardienst von Netlify verarbeitet und an mich weitergeleitet, um Ihre Anfrage zu beantworten.
 
-## YouTube-Videos
+## Videos und Hörproben (Filmmakers)
 
-Videos sind über eine Zwei-Klick-Lösung eingebunden. Erst wenn Sie aktiv auf „Video laden“ klicken, wird eine Verbindung zu YouTube (Google Ireland Limited) im erweiterten Datenschutzmodus (youtube-nocookie.com) hergestellt.
+Showreels und Hörproben sind über den Player der Plattform Filmmakers (filmmakers.one GmbH, Berlin) mit einer Zwei-Klick-Lösung eingebunden. Erst wenn Sie aktiv auf „Video abspielen“ bzw. „Hörproben laden“ klicken, wird eine Verbindung zu filmmakers.eu hergestellt. Dabei werden technisch notwendige Daten (z. B. Ihre IP-Adresse und die aufgerufene Seite) an Filmmakers übertragen. Rechtsgrundlage ist Ihre Einwilligung durch den Klick (Art. 6 Abs. 1 lit. a DSGVO).
 
 ## Ihre Rechte
 

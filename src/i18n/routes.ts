@@ -1,19 +1,16 @@
 import { defaultLocale, type Locale } from './config';
 
-/**
- * Lokalisierte URL-Slugs pro Seite. Für EN/FR später je einen Eintrag ergänzen,
- * z. B. acting: { de: 'schauspiel', en: 'acting', fr: 'comedienne' }.
- */
+/** Lokalisierte URL-Slugs pro Seite. */
 export const routes = {
-  home: { de: '' },
-  acting: { de: 'schauspiel' },
-  voice: { de: 'sprechen' },
-  dramaturgy: { de: 'dramaturgie-lektorat' },
-  stories: { de: 'stories' },
-  about: { de: 'ueber-mich' },
-  thanks: { de: 'kontakt/danke' },
-  imprint: { de: 'impressum' },
-  privacy: { de: 'datenschutz' },
+  home: { de: '', en: '', fr: '' },
+  acting: { de: 'schauspiel', en: 'acting', fr: 'comedienne' },
+  voice: { de: 'sprechen', en: 'voice', fr: 'voix' },
+  dramaturgy: { de: 'dramaturgie-lektorat', en: 'script-consulting', fr: 'dramaturgie' },
+  stories: { de: 'stories', en: 'stories', fr: 'histoires' },
+  about: { de: 'ueber-mich', en: 'about', fr: 'a-propos' },
+  thanks: { de: 'kontakt/danke', en: 'contact/thanks', fr: 'contact/merci' },
+  imprint: { de: 'impressum', en: 'legal-notice', fr: 'mentions-legales' },
+  privacy: { de: 'datenschutz', en: 'privacy', fr: 'confidentialite' },
 } satisfies Record<string, Record<Locale, string>>;
 
 export type RouteKey = keyof typeof routes;

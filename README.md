@@ -3,7 +3,7 @@
 Portfolio-Website für Nicole Unger (Schauspiel · Sprechen · Dramaturgie & Lektorat · Drehbücher & Romane).
 
 **Technik:** [Astro 7](https://astro.build) (statisch, TypeScript), Plain CSS mit Design-Tokens, [Decap CMS](https://decapcms.org) unter `/admin`, Content Collections mit Zod-Schemas, Bildoptimierung über `astro:assets`, Kontaktformular über Netlify Forms.
-**Datenschutz:** keine Cookies, kein Tracking, Schriften lokal (Fontsource), YouTube nur per Zwei-Klick-Lösung über `youtube-nocookie.com`.
+**Datenschutz:** keine Cookies, kein Tracking, Schriften lokal (Fontsource), Videos und Hörproben von Filmmakers nur per Zwei-Klick-Lösung (iframe wird erst nach Klick geladen).
 
 ---
 
@@ -80,17 +80,14 @@ netlify.toml              Build-Einstellungen, Header
 
 Alle Farben, Schriften und Abstände stehen als CSS-Variablen in `src/styles/tokens.css` (z. B. `--color-accent` für das Petrol). Schriften: Playfair Display (Headlines) und Inter (Fließtext), lokal über Fontsource eingebunden.
 
-### Mehrsprachigkeit (vorbereitet, nicht aktiv)
+### Mehrsprachigkeit (DE / EN / FR)
 
-Deutsch ist die einzige aktive Sprache, ein Sprachumschalter erscheint erst ab zwei Sprachen. So wird z. B. Englisch ergänzt:
+Deutsch ist die Standardsprache (ohne Präfix), Englisch und Französisch liegen unter `/en/…` und `/fr/…` mit eigenen Slugs (z. B. `/en/acting/`, `/fr/comedienne/`). Im Kopfbereich wechselt ein Sprach-Button auf dieselbe Seite in der anderen Sprache; `hreflang`-Links sind gesetzt.
 
-1. `src/i18n/config.ts`: `locales = ['de', 'en']` und `localeMeta.en` ergänzen.
-2. `src/i18n/ui.ts`: Block `en: { … }` mit allen Schlüsseln anlegen.
-3. `src/i18n/routes.ts`: pro Seite einen englischen Slug eintragen (z. B. `acting: { de: 'schauspiel', en: 'acting' }`).
-4. Routen anlegen: `src/pages/en/index.astro`, `src/pages/en/acting.astro` … – jeweils `<ActingView locale="en" />` (die Views sind bereits sprachfähig).
-5. Inhalte: `src/content/pages/en/*.md` sowie `src/content/{vita,stations,audio,stories}/en/`.
-6. CMS: in `public/admin/config.yml` `i18n.locales: [de, en]` setzen (Listen-Sammlungen bekommen dann automatisch einen Sprachumschalter) und die Sammlung „Seiten“ für `pages/en/…` duplizieren (Decap unterstützt bei Einzelseiten nur eine Datei pro Sprache).
-7. Sprachumschalter im Header einbauen (`showLanguageSwitcher` ist bereits vorbereitet).
+- `src/i18n/config.ts` – aktive Sprachen; `src/i18n/ui.ts` – feste UI-Texte je Sprache; `src/i18n/routes.ts` – Slugs je Seite.
+- `src/pages/[lang]/[...slug].astro` erzeugt alle EN/FR-Seiten aus denselben Views wie die deutschen Seiten.
+- Inhalte: `src/content/pages/{de,en,fr}/*.md`. Listen (`vita`, `stations`, `audio`, `stories`) liegen unter `<sammlung>/<sprache>/`; **fehlt eine Übersetzung, wird automatisch der deutsche Eintrag gezeigt**.
+- CMS: „Seiten (Deutsch)“, „Pages (English)“ und „Pages (Français)“ teilen sich die Felder per YAML-Anker; Listen-Sammlungen haben einen Sprachumschalter.
 
 ---
 
@@ -153,9 +150,9 @@ Das Formular `kontakt` (in `src/components/ContactForm.astro`) ist für **Netlif
 
 ### Checkliste vor dem Livegang
 
-- [ ] Impressum und Datenschutzerklärung vollständig ersetzen (Platzhalter!). In der Datenschutzerklärung Netlify als Hoster/Formulardienst nennen.
-- [ ] Echte URLs für Crew United, e-talenta, Spotlight, IMDb unter *Einstellungen*.
-- [ ] YouTube-ID des Showreels eintragen (statt `PLATZHALTER`).
+- [ ] Datenschutzerklärung vollständig ersetzen (Platzhalter!). Netlify als Hoster/Formulardienst und Filmmakers als eingebetteten Player nennen.
+- [ ] Impressum/Haftungsausschluss rechtlich prüfen lassen.
+- [ ] Echte Hörproben hochladen (Gesang, Bairisch, Hörbuch/Kinderbuch/Trickstimme, Werbung).
 - [ ] Alle Platzhalterbilder und -hörproben ersetzen; Vita, Stationen und Stories mit echten Daten füllen.
 - [ ] Domain eintragen (siehe oben), Formular-Benachrichtigung testen.
 
@@ -190,7 +187,7 @@ Neue Galeriebilder: *Galerie → „Galerie hinzufügen +“*. Reihenfolge ände
 
 *Hörproben* → **„+ Hörprobe“** (neu) oder bestehende anklicken:
 
-- **Titel**, **Kategorie** (= Tab: Hörbuch & Literarisches / Synchron & Voiceover / Werbung & Dokumentation), **Sprache(n)**
+- **Titel**, **Kategorie** (= Tab: Gesang / Bairisch / Hörbuch, Kinderbuch & Trickstimmen / Werbung), **Sprache(n)**
 - **Audiodatei** → Datei hochladen (am besten **MP3**, 128–192 kbit/s, kurze Proben bis ca. 2 Minuten)
 - **Reihenfolge:** kleinere Zahl = weiter oben
 - **Veröffentlichen.** Löschen: Eintrag öffnen → oben „Eintrag löschen“.
@@ -218,13 +215,15 @@ Die **Referenzleiste** (Telepool | Leonine | …) steht im selben Formular unter
 
 *Einstellungen → Links & Kontaktadressen*:
 
-- **Agentur:** Name und Profil-Link (wird bei Schauspielanfragen verlinkt)
+- **Agentur:** Name, Website, E-Mail und Telefon (erscheinen bei „Buchung & Anfragen“ auf der Schauspiel-Seite, unter Kontakt und im Fußbereich)
 - **Profile & Datenbanken:** erscheinen im Menü und im Fußbereich jeder Seite
 - **E-Mail-Adressen:** Bereich und Adresse ändern. Den **Schlüssel** (info, lektorat …) bitte nicht umbenennen.
 
-### Showreel austauschen
+### Videos austauschen
 
-*Seiten → Schauspiel → Showreel → YouTube-Video-ID*: die 11 Zeichen nach `watch?v=` aus der YouTube-Adresse eintragen (bei `youtube.com/watch?v=AbCdEfGhIjK` → `AbCdEfGhIjK`). Das Vorschaubild lädst du daneben hoch – das Video selbst wird erst nach Klick der Besucher:innen von YouTube geladen.
+*Seiten → Schauspiel → Videos (Filmmakers)*: pro Video Titel, Sprache und den **Link zum Video auf Filmmakers** eintragen (z. B. `https://www.filmmakers.eu/de/actors/nicole-unger/video/261902`). Das erste Video wird groß angezeigt; Reihenfolge per ☰-Griff ändern. Der Filmmakers-Player wird erst nach Klick der Besucher:innen geladen und läuft direkt auf der Seite. Englische und französische Seite: unter *Pages (English)* bzw. *Pages (Français)* getrennt pflegen.
+
+Das Hörproben-Reel auf der Seite *Sprechen* wird genauso über einen Filmmakers-Audio-Link eingebunden.
 
 ### Wenn etwas schiefgeht
 

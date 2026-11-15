@@ -1,5 +1,5 @@
 ---
-import type { Locale } from '../i18n/config';
+import { defaultLocale, type Locale } from '../i18n/config';
 import { localizePath } from '../i18n/routes';
 import { useTranslations } from '../i18n/ui';
 import type { Settings } from '../lib/content';
@@ -12,6 +12,8 @@ interface Props {
 
 const { locale, settings } = Astro.props;
 const t = useTranslations(locale);
+// Die Unterzeile ist im CMS (Deutsch) pflegbar, für EN/FR kommt sie aus ui.ts.
+const tagline = locale === defaultLocale ? settings.tagline : t('brand.tagline');
 const year = new Date().getFullYear();
 const info = settings.emails.find((e) => e.key === 'info') ?? settings.emails[0];
 ---
@@ -20,8 +22,18 @@ const info = settings.emails.find((e) => e.key === 'info') ?? settings.emails[0]
   <div class="container site-footer__grid">
     <div class="site-footer__brand">
       <a class="site-footer__name" href={localizePath('home', locale)}>{settings.siteName}</a>
-      <p>{settings.tagline}</p>
+      <p>{tagline}</p>
       {info && <p><a href={`mailto:${info.address}`}>{info.address}</a></p>}
+      {
+        settings.agency.email && (
+          <p class="site-footer__agency">
+            <span>{t('footer.acting')}:</span>
+            <br />
+            {settings.agency.name} ·{' '}
+            <a href={`mailto:${settings.agency.email}`}>{settings.agency.email}</a>
+          </p>
+        )
+      }
     </div>
 
     <nav aria-label={t('nav.label')}>
@@ -95,6 +107,9 @@ const info = settings.emails.find((e) => e.key === 'info') ?? settings.emails[0]
   }
   .site-footer__brand p {
     margin-top: var(--space-xs);
+  }
+  .site-footer__agency span {
+    color: var(--color-inverse-muted);
   }
   .site-footer__name {
     font-family: var(--font-serif);

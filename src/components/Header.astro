@@ -1,5 +1,5 @@
 ---
-import type { Locale } from '../i18n/config';
+import { defaultLocale, localeMeta, locales, showLanguageSwitcher, type Locale } from '../i18n/config';
 import { localizePath, type RouteKey } from '../i18n/routes';
 import { useTranslations } from '../i18n/ui';
 import type { Settings } from '../lib/content';
@@ -8,34 +8,25 @@ import { mainNav } from '../lib/navigation';
 interface Props {
   locale: Locale;
   current?: RouteKey;
+  /** Seite, auf die der Sprachumschalter in den anderen Sprachen verlinkt */
+  route: RouteKey;
   settings: Settings;
 }
 
-const { locale, current, settings } = Astro.props;
+const { locale, current, route, settings } = Astro.props;
 const t = useTranslations(locale);
-const profiles = settings.profiles.filter((p) => p.url !== settings.agency.url);
+// Die Unterzeile ist im CMS (Deutsch) pflegbar, für EN/FR kommt sie aus ui.ts.
+const tagline = locale === defaultLocale ? settings.tagline : t('brand.tagline');
+const profiles = settings.profiles;
 ---
 
 <header class="site-header" data-header>
   <div class="site-header__inner container">
     <a class="brand" href={localizePath('home', locale)}>
       <span class="brand__name">{settings.siteName}</span>
-      <span class="brand__tagline">{settings.tagline}</span>
+      <span class="brand__tagline">{tagline}</span>
       <span class="visually-hidden"> – {t('nav.home')}</span>
     </a>
-
-    <button
-      class="nav-toggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="site-nav"
-      data-nav-toggle
-      data-label-open={t('nav.open')}
-      data-label-close={t('nav.close')}
-    >
-      <span class="nav-toggle__bars" aria-hidden="true"></span>
-      <span class="visually-hidden" data-nav-toggle-label>{t('nav.open')}</span>
-    </button>
 
     <nav class="site-nav" id="site-nav" aria-label={t('nav.label')} data-nav>
       <ul class="site-nav__list">
@@ -49,8 +40,8 @@ const profiles = settings.profiles.filter((p) => p.url !== settings.agency.url);
           ))
         }
       </ul>
-      <a class="site-nav__agency" href={settings.agency.url} target="_blank" rel="noopener">
-        {settings.agency.name}<span class="visually-hidden"> {t('common.externalLink')}</span>
+      <a class="site-nav__agency" href={localizePath('acting', locale, 'buchung')}>
+        {t('nav.agency')}
       </a>
       <ul class="site-nav__profiles" aria-label={t('nav.profiles')}>
         {
@@ -65,10 +56,68 @@ const profiles = settings.profiles.filter((p) => p.url !== settings.agency.url);
         }
       </ul>
     </nav>
+
+    <div class="site-header__actions">
+    {
+      showLanguageSwitcher && (
+        <details class="lang" data-lang>
+          <summary class="lang__button" aria-label={`${t('lang.label')} (${t('lang.current')}: ${localeMeta[locale].label})`}>
+            <svg class="lang__globe" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z" />
+            </svg>
+            <span>{localeMeta[locale].short}</span>
+            <span class="lang__chevron" aria-hidden="true" />
+          </summary>
+          <ul class="lang__menu">
+            {locales.map((l) => (
+              <li>
+                <a
+                  href={localizePath(route, l)}
+                  hreflang={localeMeta[l].htmlLang}
+                  lang={localeMeta[l].htmlLang}
+                  aria-current={l === locale ? 'true' : undefined}
+                >
+                  <span class="lang__code">{localeMeta[l].short}</span>
+                  {localeMeta[l].label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )
+    }
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        data-nav-toggle
+        data-label-open={t('nav.open')}
+        data-label-close={t('nav.close')}
+      >
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+        <span class="visually-hidden" data-nav-toggle-label>{t('nav.open')}</span>
+      </button>
+
+    </div>
   </div>
 </header>
 
 <script>
+  const lang = document.querySelector<HTMLDetailsElement>('[data-lang]');
+  if (lang) {
+    document.addEventListener('click', (e) => {
+      if (lang.open && !lang.contains(e.target as Node)) lang.open = false;
+    });
+    lang.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lang.open) {
+        lang.open = false;
+        lang.querySelector('summary')?.focus();
+      }
+    });
+  }
+
   const header = document.querySelector<HTMLElement>('[data-header]');
   const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
   const label = document.querySelector<HTMLElement>('[data-nav-toggle-label]');
@@ -91,7 +140,7 @@ const profiles = settings.profiles.filter((p) => p.url !== settings.agency.url);
     nav.addEventListener('click', (e) => {
       if ((e.target as HTMLElement).closest('a')) setOpen(false);
     });
-    window.matchMedia('(min-width: 64em)').addEventListener('change', (e) => e.matches && setOpen(false));
+    window.matchMedia('(min-width: 72em)').addEventListener('change', (e) => e.matches && setOpen(false));
 
     const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
     onScroll();
@@ -160,6 +209,96 @@ const profiles = settings.profiles.filter((p) => p.url !== settings.agency.url);
     }
   }
 
+  /* ---------- Sprachumschalter ---------- */
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+  .lang {
+    position: relative;
+    z-index: 3;
+  }
+  .lang__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.5rem;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--color-line-strong);
+    border-radius: 999px;
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--color-heading);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: border-color var(--duration) var(--ease), color var(--duration) var(--ease);
+  }
+  .lang__button::-webkit-details-marker {
+    display: none;
+  }
+  .lang__button:hover,
+  .lang[open] .lang__button {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  .lang__globe {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+  }
+  .lang__chevron {
+    width: 0.4rem;
+    height: 0.4rem;
+    margin: -0.15rem 0 0 0.1rem;
+    border-right: 1.4px solid currentColor;
+    border-bottom: 1.4px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform var(--duration) var(--ease);
+  }
+  .lang[open] .lang__chevron {
+    margin-top: 0.2rem;
+    transform: rotate(-135deg);
+  }
+  .lang__menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.5rem);
+    min-width: 11rem;
+    padding: 0.4rem;
+    list-style: none;
+    background: var(--color-surface);
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 12px 32px rgb(20 22 23 / 0.12);
+  }
+  .lang__menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0.7rem;
+    border-radius: var(--radius);
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+  .lang__menu a:hover {
+    background: var(--color-surface-alt);
+    color: var(--color-accent);
+  }
+  .lang__menu a[aria-current='true'] {
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+  .lang__code {
+    width: 1.6rem;
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+
   .site-nav__list,
   .site-nav__profiles {
     list-style: none;
@@ -175,7 +314,7 @@ const profiles = settings.profiles.filter((p) => p.url !== settings.agency.url);
   }
 
   /* ---------- Desktop ---------- */
-  @media (min-width: 64em) {
+  @media (min-width: 72em) {
     .nav-toggle {
       display: none;
     }
@@ -186,12 +325,13 @@ const profiles = settings.profiles.filter((p) => p.url !== settings.agency.url);
     }
     .site-nav__list {
       display: flex;
-      gap: clamp(1rem, 2vw, 2rem);
+      gap: clamp(0.9rem, 1.6vw, 2rem);
       font-size: var(--text-sm);
     }
     .site-nav__list a {
       position: relative;
       padding-block: 0.4rem;
+      white-space: nowrap;
     }
     .site-nav__list a::after {
       content: '';
@@ -227,7 +367,7 @@ const profiles = settings.profiles.filter((p) => p.url !== settings.agency.url);
   }
 
   /* ---------- Mobil: Burger ---------- */
-  @media (max-width: 63.99em) {
+  @media (max-width: 71.99em) {
     .nav-toggle {
       position: relative;
       z-index: 2;

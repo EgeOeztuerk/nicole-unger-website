@@ -16,7 +16,7 @@ interface Props {
 
 const { samples, locale, headingId } = Astro.props;
 const t = useTranslations(locale);
-const categories = ['hoerbuch', 'synchron', 'werbung'] as const;
+const categories = ['gesang', 'bayerisch', 'hoerbuch', 'werbung'] as const;
 const groups = categories.map((category) => ({
   category,
   label: t(`audio.category.${category}`),
@@ -26,6 +26,20 @@ const groups = categories.map((category) => ({
 }));
 ---
 
+{
+  samples.length === 0 && (
+    <div class="lounge-soon">
+      <p>{t('audio.soon')}</p>
+      <ul>
+        {groups.map((g) => (
+          <li>{g.label}</li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+{samples.length > 0 && (
 <div class="lounge" data-lounge>
   <div class="lounge__tabs" role="tablist" aria-label={t('audio.tabsLabel')} aria-describedby={headingId} hidden data-tablist>
     {
@@ -97,6 +111,7 @@ const groups = categories.map((category) => ({
     ))
   }
 </div>
+)}
 
 <script>
   const fmt = (s: number) => {
@@ -201,6 +216,29 @@ const groups = categories.map((category) => ({
 </script>
 
 <style>
+  .lounge-soon {
+    padding: var(--space-lg);
+    border: var(--border);
+    border-radius: var(--radius);
+  }
+  .lounge-soon p {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+  .lounge-soon ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+  }
+  .lounge-soon li {
+    padding: 0.25rem 0.8rem;
+    border: 1px solid var(--color-line-strong);
+    border-radius: 999px;
+    font-family: var(--font-serif);
+  }
   .lounge__tabs {
     display: flex;
     flex-wrap: wrap;

@@ -6,8 +6,8 @@ import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { defaultLocale, localeMeta, type Locale } from '../i18n/config';
-import type { RouteKey } from '../i18n/routes';
+import { defaultLocale, localeMeta, locales, type Locale } from '../i18n/config';
+import { localizePath, type RouteKey } from '../i18n/routes';
 import { useTranslations } from '../i18n/ui';
 import { getSettings } from '../lib/content';
 
@@ -16,13 +16,15 @@ interface Props {
   description?: string;
   locale?: Locale;
   current?: RouteKey;
+  /** Seite für Sprachumschalter & hreflang (Standard: current bzw. Startseite) */
+  route?: RouteKey;
   ogImage?: ImageMetadata;
   noindex?: boolean;
   /** Startseite: Titel ohne Namenszusatz */
   isHome?: boolean;
 }
 
-const { title, description, locale = defaultLocale, current, ogImage, noindex = false, isHome = false } = Astro.props;
+const { title, description, locale = defaultLocale, current, route = current ?? 'home', ogImage, noindex = false, isHome = false } = Astro.props;
 const settings = await getSettings();
 const t = useTranslations(locale);
 const fullTitle = isHome ? title : `${title} – ${settings.siteName}`;
@@ -38,6 +40,11 @@ const og = ogImage ? await getImage({ src: ogImage, width: 1200, height: 630, fi
     <title>{fullTitle}</title>
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={canonical} />
+    {
+      !noindex &&
+        locales.map((l) => <link rel="alternate" hreflang={localeMeta[l].htmlLang} href={new URL(localizePath(route, l), Astro.site)} />)
+    }
+    {!noindex && <link rel="alternate" hreflang="x-default" href={new URL(localizePath(route, defaultLocale), Astro.site)} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#f7f4ee" />
     {noindex && <meta name="robots" content="noindex" />}
@@ -52,7 +59,7 @@ const og = ogImage ? await getImage({ src: ogImage, width: 1200, height: 630, fi
   </head>
   <body>
     <a class="skip-link" href="#main">{t('skip.toMain')}</a>
-    <Header locale={locale} current={current} settings={settings} />
+    <Header locale={locale} current={current} route={route} settings={settings} />
     <main id="main" tabindex="-1">
       <slot />
     </main>

@@ -76,9 +76,21 @@ const settings = await getSettings();
 
         <div class="acting-note">
           <p>{t('contact.actingNote')}</p>
-          <a class="link-arrow" href={settings.agency.url} target="_blank" rel="noopener">
-            {settings.agency.name}<span class="visually-hidden"> {t('common.externalLink')}</span>
-          </a>
+          <p>
+            <strong>{settings.agency.name}</strong>
+            {settings.agency.email && (
+              <>
+                <br />
+                <a href={`mailto:${settings.agency.email}`}>{settings.agency.email}</a>
+              </>
+            )}
+            {settings.agency.phone && (
+              <>
+                <br />
+                <a href={`tel:${settings.agency.phone.replace(/\s/g, '')}`}>{settings.agency.phone}</a>
+              </>
+            )}
+          </p>
         </div>
       </div>
 

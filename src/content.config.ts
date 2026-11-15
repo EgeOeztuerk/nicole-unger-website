@@ -24,6 +24,12 @@ const pictureWith = (image: SchemaContext['image']) =>
     alt: z.string().min(1, { error: 'Alternativtext ist Pflicht' }),
   });
 
+/** Link auf ein Filmmakers-Video bzw. -Audio, z. B. https://www.filmmakers.eu/de/actors/nicole-unger/video/261902 */
+const filmmakersUrl = (kind: 'video' | 'audio') =>
+  z.string().regex(new RegExp(`^https://www\\.filmmakers\\.eu/\\w{2}/actors/[\\w-]+/${kind}/\\d+/?$`), {
+    error: `Bitte den Filmmakers-Link zum ${kind === 'video' ? 'Video' : 'Audio'} eintragen (…/actors/<name>/${kind}/<nummer>)`,
+  });
+
 const routeKey = z.enum(['acting', 'voice', 'dramaturgy', 'stories', 'about']);
 
 const seo = {
@@ -66,12 +72,17 @@ const acting = defineCollection({
       ...seo,
       kicker: z.string().optional(),
       intro: z.string().optional(),
-      showreel: z.object({
-        heading: z.string(),
-        youtubeId: z.string().regex(/^[\w-]{11}$/, { error: 'Bitte nur die 11-stellige YouTube-ID eintragen' }),
-        poster: image(),
-        posterAlt: z.string().min(1),
-      }),
+      reelsHeading: z.string(),
+      reels: z
+        .array(
+          z.object({
+            title: z.string(),
+            language: z.enum(['de', 'en', 'fr']),
+            description: z.string().optional(),
+            url: filmmakersUrl('video'),
+          }),
+        )
+        .min(1),
       galleryHeading: z.string(),
       gallery: z.array(pictureWith(image).extend({ caption: z.string().optional() })),
       vitaHeading: z.string(),
@@ -92,6 +103,13 @@ const voice = defineCollection({
       kicker: z.string().optional(),
       intro: z.string().optional(),
       image: optionalPicture(pictureWith(image)),
+      reel: z
+        .object({
+          heading: z.string(),
+          text: z.string().optional(),
+          url: filmmakersUrl('audio'),
+        })
+        .optional(),
       loungeHeading: z.string(),
       traitsHeading: z.string(),
       traits: z.array(z.object({ label: z.string(), value: z.string() })),
@@ -197,7 +215,7 @@ const audio = defineCollection({
   loader: glob({ base: './src/content/audio', pattern: '**/*.md' }),
   schema: z.object({
     title: z.string(),
-    category: z.enum(['hoerbuch', 'synchron', 'werbung']),
+    category: z.enum(['gesang', 'bayerisch', 'hoerbuch', 'werbung']),
     languages: z.array(z.enum(['de', 'fr', 'en', 'bar'])).min(1),
     file: z.string().regex(/^\/audio\/.+\.(mp3|m4a|wav|ogg)$/i, { error: 'Audiodatei muss unter /audio/ liegen' }),
     description: z.string().optional(),

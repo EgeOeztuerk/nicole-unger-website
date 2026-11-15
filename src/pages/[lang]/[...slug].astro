@@ -1,0 +1,43 @@
+---
+/**
+ * Erzeugt alle Seiten der Nicht-Standard-Sprachen (EN, FR …) mit ihren
+ * lokalisierten Slugs aus src/i18n/routes.ts, z. B. /en/acting/ oder /fr/comedienne/.
+ * Die deutschen Seiten liegen als einzelne Dateien direkt unter src/pages/.
+ */
+import type { GetStaticPaths } from 'astro';
+import { defaultLocale, locales, type Locale } from '../../i18n/config';
+import { routes, type RouteKey } from '../../i18n/routes';
+import { useTranslations } from '../../i18n/ui';
+import HomeView from '../../views/HomeView.astro';
+import ActingView from '../../views/ActingView.astro';
+import VoiceView from '../../views/VoiceView.astro';
+import DramaturgyView from '../../views/DramaturgyView.astro';
+import StoriesView from '../../views/StoriesView.astro';
+import AboutView from '../../views/AboutView.astro';
+import LegalView from '../../views/LegalView.astro';
+import MessageView from '../../views/MessageView.astro';
+
+export const getStaticPaths = (() =>
+  locales
+    .filter((lang) => lang !== defaultLocale)
+    .flatMap((lang) =>
+      (Object.keys(routes) as RouteKey[]).map((key) => ({
+        params: { lang, slug: routes[key][lang] || undefined },
+        props: { key },
+      })),
+    )) satisfies GetStaticPaths;
+
+const locale = Astro.params.lang as Locale;
+const { key } = Astro.props as { key: RouteKey };
+const t = useTranslations(locale);
+---
+
+{key === 'home' && <HomeView locale={locale} />}
+{key === 'acting' && <ActingView locale={locale} />}
+{key === 'voice' && <VoiceView locale={locale} />}
+{key === 'dramaturgy' && <DramaturgyView locale={locale} />}
+{key === 'stories' && <StoriesView locale={locale} />}
+{key === 'about' && <AboutView locale={locale} />}
+{key === 'imprint' && <LegalView locale={locale} name="impressum" />}
+{key === 'privacy' && <LegalView locale={locale} name="datenschutz" />}
+{key === 'thanks' && <MessageView locale={locale} route="thanks" title={t('thanks.title')} text={t('thanks.text')} />}
