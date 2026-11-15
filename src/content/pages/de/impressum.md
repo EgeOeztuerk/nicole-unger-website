@@ -13,11 +13,9 @@ eMail: mail@agenturlm.de
 Mobil: +49 151 1524 5292
 [www.agenturlm.de](http://www.agenturlm.de)
 
-
-
 ## Kontakt
 
-E-Mail: info@nicoleunger-creative.de
+E-Mail: mail\[at]agenturlm.de
 
 ## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
 
