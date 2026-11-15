@@ -10,7 +10,7 @@ disciplines:
   - Lektorat & Stoffentwicklung
   - Drehbücher & Romane
 heroImages:
-  - image: /src/assets/uploads/nicole-8.jpg
+  - image: /src/assets/uploads/bewerbungsfoto_ege.jpg
     alt: Platzhalter – Porträt von Nicole Unger
   - image: /src/assets/uploads/hero-2.jpg
     alt: Platzhalter – Szenenbild mit Nicole Unger
