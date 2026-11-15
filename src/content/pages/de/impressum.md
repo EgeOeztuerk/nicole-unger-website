@@ -1,14 +1,19 @@
 ---
 title: Impressum
 ---
-
-*Platzhalter – bitte vor der Veröffentlichung durch ein vollständiges Impressum ersetzen (z. B. mit einem Impressum-Generator oder nach rechtlicher Beratung).*
-
 ## Angaben gemäß § 5 DDG
 
-Nicole Unger\
-Straße Hausnummer\
-PLZ Ort
+Nicole Unger
+
+c/o Agentur Lieblingsmensch
+Gregor-Mendel-Strasse 1a
+14469 Potsdam
+
+eMail: mail@agenturlm.de
+Mobil: +49 151 1524 5292
+[www.agenturlm.de](http://www.agenturlm.de)
+
+
 
 ## Kontakt
 
