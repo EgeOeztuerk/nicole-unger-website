@@ -9,7 +9,7 @@ c/o Agentur Lieblingsmensch
 Gregor-Mendel-Strasse 1a
 14469 Potsdam
 
-eMail: mail@agenturlm.de
+eMail: mail\[at]agenturlm.de
 Mobil: +49 151 1524 5292
 [www.agenturlm.de](http://www.agenturlm.de)
 
