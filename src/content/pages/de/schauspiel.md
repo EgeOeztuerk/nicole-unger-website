@@ -8,7 +8,7 @@ intro: Präsenz vor der Kamera und auf der Bühne – mit dem genauen Blick der
 showreel:
   heading: Showreel 2026
   youtubeId: CFqlovhWIw4
-  poster: /src/assets/uploads/nicole-8.jpg
+  poster: /src/assets/uploads/124-nicole_unger_web_124.jpg
   posterAlt: Platzhalter – Standbild aus dem Showreel von Nicole Unger
 galleryHeading: Headshots & Szenenbilder
 gallery:
