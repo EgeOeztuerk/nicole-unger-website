@@ -4,8 +4,8 @@ description: Développement, lecture de scénarios et script consulting par la d
 kicker: Développement & lecture de scénarios
 lead: Une analyse approfondie, à la croisée de la théorie et de la pratique.
 image:
-  image: /src/assets/uploads/dramaturgie.jpg
-  alt: Image provisoire – bureau avec scénario et notes
+  image: /src/assets/uploads/nicole-unger-07.jpg
+  alt: Nicole Unger avec de grandes lunettes noires
 languagesNote: Je propose mes services en allemand, en français et en anglais.
 references:
   label: Références & collaborations (sélection)

@@ -4,8 +4,8 @@ description: Nicole Unger – actress, voice artist, dramaturge and author. Biog
 kicker: About me
 lead: Stories have always fascinated me.
 portrait:
-  image: /src/assets/uploads/portrait.jpg
-  alt: Placeholder – portrait of Nicole Unger
+  image: /src/assets/uploads/nicole-unger-01.jpg
+  alt: Portrait of Nicole Unger in a white lace blouse with a pearl necklace
 engagement:
   heading: Commitment & Values
   text: In my private life, treating our planet's resources with care matters a great deal to me. Animals and nature take up a large part of my life. In my view, appreciative and respectful interaction on an equal footing is the only thing that can lead us to a future worth living.

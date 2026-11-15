@@ -28,24 +28,30 @@ reels:
     url: https://www.filmmakers.eu/de/actors/nicole-unger/video/221194
 galleryHeading: Headshots & Szenenbilder
 gallery:
-  - image: /src/assets/uploads/headshot-1.jpg
-    alt: Platzhalter – Headshot von Nicole Unger, frontal
-    caption: "Foto: Name Fotograf:in"
-  - image: /src/assets/uploads/headshot-2.jpg
-    alt: Platzhalter – Headshot von Nicole Unger, Halbprofil
-    caption: "Foto: Name Fotograf:in"
-  - image: /src/assets/uploads/headshot-3.jpg
-    alt: Platzhalter – Headshot von Nicole Unger, lachend
-    caption: "Foto: Name Fotograf:in"
-  - image: /src/assets/uploads/headshot-4.jpg
-    alt: Platzhalter – Szenenbild aus einer Fernsehproduktion
-    caption: Szenenbild
-  - image: /src/assets/uploads/headshot-5.jpg
-    alt: Platzhalter – Szenenbild aus einer Theaterinszenierung
-    caption: Szenenbild
-  - image: /src/assets/uploads/headshot-6.jpg
-    alt: Platzhalter – Ganzkörperporträt von Nicole Unger
-    caption: "Foto: Name Fotograf:in"
+  - image: /src/assets/uploads/nicole-unger-11.jpg
+    alt: Nahaufnahme von Nicole Unger vor violettem Hintergrund
+    caption: "Foto: Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-08.jpg
+    alt: Nicole Unger in grünem Pullover, eine Hand im Haar
+    caption: "Foto: Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-10.jpg
+    alt: Nicole Unger in kariertem Hemd mit Zöpfen
+    caption: "Foto: Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-03.jpg
+    alt: Nicole Unger in hellblauem Kleid vor violettem Hintergrund
+    caption: "Foto: Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-09.jpg
+    alt: Nicole Unger in weißer Bluse und violettem Rock vor hellblauem Hintergrund
+    caption: "Foto: URBAN_RUTHS"
+  - image: /src/assets/uploads/nicole-unger-05.jpg
+    alt: Nicole Unger mit offenem Haar in weißer Spitzenbluse
+    caption: "Foto: Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-06.jpg
+    alt: Nicole Unger lachend in rot-weiß gepunkteter Bluse vor einer Backsteinwand
+    caption: "Foto: Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-12.jpg
+    alt: Nicole Unger in weißer Spitzenbluse mit Perlenkette, im Freien
+    caption: "Foto: Darya Birnstiel"
 vitaHeading: Vita (Auswahl)
 profilesHeading: Profile & Datenbanken
 booking:

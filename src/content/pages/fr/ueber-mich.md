@@ -4,8 +4,8 @@ description: Nicole Unger – comédienne, voix, dramaturge et autrice. Biograph
 kicker: À propos
 lead: Les histoires m'ont toujours fascinée.
 portrait:
-  image: /src/assets/uploads/portrait.jpg
-  alt: Image provisoire – portrait de Nicole Unger
+  image: /src/assets/uploads/nicole-unger-01.jpg
+  alt: Portrait de Nicole Unger en chemisier de dentelle blanc avec collier de perles
 engagement:
   heading: Engagement & valeurs
   text: Dans ma vie privée, préserver les ressources de notre planète me tient particulièrement à cœur. Les animaux et la nature occupent une grande place dans ma vie. À mes yeux, seul un vivre-ensemble respectueux, bienveillant et d'égal à égal peut nous mener vers un avenir digne d'être vécu.

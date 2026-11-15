@@ -24,24 +24,30 @@ reels:
     url: https://www.filmmakers.eu/en/actors/nicole-unger/video/97566
 galleryHeading: Headshots & Production Stills
 gallery:
-  - image: /src/assets/uploads/headshot-1.jpg
-    alt: Placeholder – headshot of Nicole Unger, front view
-    caption: "Photo: photographer's name"
-  - image: /src/assets/uploads/headshot-2.jpg
-    alt: Placeholder – headshot of Nicole Unger, three-quarter view
-    caption: "Photo: photographer's name"
-  - image: /src/assets/uploads/headshot-3.jpg
-    alt: Placeholder – headshot of Nicole Unger, laughing
-    caption: "Photo: photographer's name"
-  - image: /src/assets/uploads/headshot-4.jpg
-    alt: Placeholder – still from a TV production
-    caption: Production still
-  - image: /src/assets/uploads/headshot-5.jpg
-    alt: Placeholder – still from a theatre production
-    caption: Production still
-  - image: /src/assets/uploads/headshot-6.jpg
-    alt: Placeholder – full-length portrait of Nicole Unger
-    caption: "Photo: photographer's name"
+  - image: /src/assets/uploads/nicole-unger-11.jpg
+    alt: Close-up of Nicole Unger against a purple background
+    caption: "Photo: Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-08.jpg
+    alt: Nicole Unger in a green jumper, one hand in her hair
+    caption: "Photo: Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-10.jpg
+    alt: Nicole Unger in a checked shirt with braids
+    caption: "Photo: Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-03.jpg
+    alt: Nicole Unger in a light blue dress against a purple background
+    caption: "Photo: Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-09.jpg
+    alt: Nicole Unger in a white blouse and purple skirt against a light blue background
+    caption: "Photo: URBAN_RUTHS"
+  - image: /src/assets/uploads/nicole-unger-05.jpg
+    alt: Nicole Unger with her hair down in a white lace blouse
+    caption: "Photo: Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-06.jpg
+    alt: Nicole Unger laughing in a red polka-dot blouse in front of a brick wall
+    caption: "Photo: Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-12.jpg
+    alt: Nicole Unger in a white lace blouse and pearl necklace, outdoors
+    caption: "Photo: Darya Birnstiel"
 vitaHeading: Credits (selection)
 profilesHeading: Profiles & Databases
 booking:

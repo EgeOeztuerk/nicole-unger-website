@@ -24,24 +24,30 @@ reels:
     url: https://www.filmmakers.eu/en/actors/nicole-unger/video/97566
 galleryHeading: Photos & images de tournage
 gallery:
-  - image: /src/assets/uploads/headshot-1.jpg
-    alt: Image provisoire – portrait de Nicole Unger, de face
-    caption: "Photo : nom du/de la photographe"
-  - image: /src/assets/uploads/headshot-2.jpg
-    alt: Image provisoire – portrait de Nicole Unger, de trois quarts
-    caption: "Photo : nom du/de la photographe"
-  - image: /src/assets/uploads/headshot-3.jpg
-    alt: Image provisoire – portrait de Nicole Unger, souriante
-    caption: "Photo : nom du/de la photographe"
-  - image: /src/assets/uploads/headshot-4.jpg
-    alt: Image provisoire – image d'une production télévisée
-    caption: Image de tournage
-  - image: /src/assets/uploads/headshot-5.jpg
-    alt: Image provisoire – image d'une mise en scène théâtrale
-    caption: Image de tournage
-  - image: /src/assets/uploads/headshot-6.jpg
-    alt: Image provisoire – portrait en pied de Nicole Unger
-    caption: "Photo : nom du/de la photographe"
+  - image: /src/assets/uploads/nicole-unger-11.jpg
+    alt: Gros plan de Nicole Unger sur fond violet
+    caption: "Photo : Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-08.jpg
+    alt: Nicole Unger en pull vert, une main dans les cheveux
+    caption: "Photo : Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-10.jpg
+    alt: Nicole Unger en chemise à carreaux, avec des tresses
+    caption: "Photo : Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-03.jpg
+    alt: Nicole Unger en robe bleu clair sur fond violet
+    caption: "Photo : Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-09.jpg
+    alt: Nicole Unger en chemisier blanc et jupe violette sur fond bleu clair
+    caption: "Photo : URBAN_RUTHS"
+  - image: /src/assets/uploads/nicole-unger-05.jpg
+    alt: Nicole Unger cheveux détachés, chemisier de dentelle blanc
+    caption: "Photo : Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-06.jpg
+    alt: Nicole Unger riant, chemisier rouge à pois devant un mur de briques
+    caption: "Photo : Darya Birnstiel"
+  - image: /src/assets/uploads/nicole-unger-12.jpg
+    alt: Nicole Unger en chemisier de dentelle blanc et collier de perles, en extérieur
+    caption: "Photo : Darya Birnstiel"
 vitaHeading: Filmographie (sélection)
 profilesHeading: Profils & bases de données
 booking:

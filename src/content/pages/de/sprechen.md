@@ -4,8 +4,8 @@ description: Audio-Lounge der Sprecherin Nicole Unger – Hörbuch, Kinderbuch &
 kicker: Audio-Lounge
 intro: Hörbuch, Synchron, Voiceover und Werbung – auf Deutsch oder Bayerisch, Französisch und Englisch. Hören Sie selbst.
 image:
-  image: /src/assets/uploads/sprechen.jpg
-  alt: Platzhalter – Nicole Unger am Mikrofon im Tonstudio
+  image: /src/assets/uploads/124-nicole_unger_web_124.jpg
+  alt: Nicole Unger, Porträt vor hellblauem Hintergrund
 reel:
   heading: Sprecherinnen-Reel
   text: Eine Auswahl meiner Hörproben

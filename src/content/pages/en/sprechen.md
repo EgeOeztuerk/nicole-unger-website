@@ -4,8 +4,8 @@ description: Audio lounge of voice artist Nicole Unger – audiobooks, children'
 kicker: Audio Lounge
 intro: Audiobooks, dubbing, voice-over and commercials – in German or Bavarian, French and English. Have a listen.
 image:
-  image: /src/assets/uploads/sprechen.jpg
-  alt: Placeholder – Nicole Unger at the microphone in a recording studio
+  image: /src/assets/uploads/124-nicole_unger_web_124.jpg
+  alt: Nicole Unger, portrait against a light blue background
 reel:
   heading: Voice Reel
   text: A selection of my voice samples

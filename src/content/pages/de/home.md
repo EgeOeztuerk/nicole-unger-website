@@ -10,12 +10,12 @@ disciplines:
   - Lektorat & Stoffentwicklung
   - Drehbücher & Romane
 heroImages:
-  - image: /src/assets/uploads/bewerbungsfoto_ege.jpg
-    alt: Platzhalter – Porträt von Nicole Unger
-  - image: /src/assets/uploads/hero-2.jpg
-    alt: Platzhalter – Szenenbild mit Nicole Unger
-  - image: /src/assets/uploads/hero-3.jpg
-    alt: Platzhalter – Nicole Unger im Studio
+  - image: /src/assets/uploads/nicole-unger-02.jpg
+    alt: Nicole Unger lächelnd, die Hände im Haar, in dunkelrotem Pullover
+  - image: /src/assets/uploads/nicole_unger_web_314.jpg
+    alt: Nicole Unger vor rosafarbenem Hintergrund, eine Hand im Haar
+  - image: /src/assets/uploads/nicole-unger-06.jpg
+    alt: Nicole Unger lachend in rot-weiß gepunkteter Bluse vor einer Backsteinwand
 intro: Branchen-Insiderin mit 360°-Blick – vor und hinter der Kamera, auf der
   Bühne, am Mikrofon und am Manuskript.
 tiles:
@@ -23,18 +23,18 @@ tiles:
     text: Showreel, Headshots, Vita und Hörproben – für Casting, Regie und
       Produktion.
     link: acting
-    image: /src/assets/uploads/kachel-schauspiel.jpg
-    alt: Platzhalter – Nicole Unger vor der Kamera
+    image: /src/assets/uploads/nicole-unger-04.jpg
+    alt: Nicole Unger in dunkler Spitzenbluse vor petrolfarbener Wand
   - title: Stoffentwicklung & Lektorat
     text: Dramaturgie, Gutachten und Script Consulting – für Produktion, Verleih,
       Sender und Autor:innen.
     link: dramaturgy
-    image: /src/assets/uploads/kachel-stoffe.jpg
-    alt: Platzhalter – Manuskript mit Notizen
+    image: /src/assets/uploads/nicole-unger-12.jpg
+    alt: Nicole Unger in weißer Spitzenbluse mit Perlenkette, im Freien
   - title: Stories
     text: Eigene Drehbücher und Romane – Projekte in Entwicklung und
       Veröffentlichungen.
     link: stories
-    image: /src/assets/uploads/kachel-stories.jpg
-    alt: Platzhalter – aufgeschlagenes Notizbuch
+    image: /src/assets/uploads/nicole-unger-13.jpg
+    alt: Schwarz-Weiß-Porträt von Nicole Unger im Dirndl
 ---

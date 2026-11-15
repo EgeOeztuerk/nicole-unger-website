@@ -4,8 +4,8 @@ description: Nicole Unger – Schauspielerin, Sprecherin, Dramaturgin und Autori
 kicker: Über mich
 lead: Geschichten haben mich seit jeher fasziniert.
 portrait:
-  image: /src/assets/uploads/portrait.jpg
-  alt: Platzhalter – Porträt von Nicole Unger
+  image: /src/assets/uploads/nicole-unger-01.jpg
+  alt: Porträt von Nicole Unger in weißer Spitzenbluse mit Perlenkette
 engagement:
   heading: Engagement & Werte
   text: Privat ist mir ein ressourcenschonender Umgang mit unserer Erde besonders wichtig. Tiere und Natur nehmen einen großen Platz in meinem Leben ein. Ein wertschätzendes, respektvolles Miteinander auf Augenhöhe ist aus meiner Sicht das Einzige, was uns in eine lebenswerte Zukunft führen kann.
