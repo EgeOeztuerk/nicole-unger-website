@@ -8,13 +8,13 @@ title: Legal Notice
 
 Nicole Unger\
 c/o Agentur Lieblingsmensch\
-Gregor-Mendel-Straße 1a\
+Gregor-Mendel-Strasse 1a\
 14469 Potsdam\
 Germany
 
 ## Contact
 
-Email: [mail@agenturlm.de](mailto:mail@agenturlm.de)\
+Email: mail\[at]agenturlm.de\
 Mobile: +49 151 1524 5292\
 Web: [www.agenturlm.de](https://www.agenturlm.de)
 

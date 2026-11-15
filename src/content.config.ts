@@ -80,6 +80,8 @@ const acting = defineCollection({
             language: z.enum(['de', 'en', 'fr']),
             description: z.string().optional(),
             url: filmmakersUrl('video'),
+            poster: optional(image()),
+            posterAlt: z.string().optional(),
           }),
         )
         .min(1),

@@ -6,6 +6,8 @@ intro: Präsenz vor der Kamera und auf der Bühne – mit dem genauen Blick der 
 reelsHeading: Showreels
 reels:
   - title: Showreel 2026
+    poster: /src/assets/uploads/124-nicole_unger_web_124.jpg
+    posterAlt: Nicole Unger – Standbild aus dem Showreel
     language: de
     description: Kurze Clips
     url: https://www.filmmakers.eu/de/actors/nicole-unger/video/261902

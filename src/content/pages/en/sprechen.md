@@ -2,7 +2,7 @@
 title: Voice
 description: Audio lounge of voice artist Nicole Unger – audiobooks, children's books & character voices, singing, Bavarian dialect and commercials.
 kicker: Audio Lounge
-intro: Audiobooks, children's books, character voices, singing and commercials – in German and French, and in Bavarian dialect on request. Have a listen.
+intro: Audiobooks, dubbing, voice-over and commercials – in German or Bavarian, French and English. Have a listen.
 image:
   image: /src/assets/uploads/sprechen.jpg
   alt: Placeholder – Nicole Unger at the microphone in a recording studio

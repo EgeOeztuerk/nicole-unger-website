@@ -133,6 +133,8 @@ collections:
                 widget: string
                 hint: 'Link zum Video auf Filmmakers kopieren, z. B. https://www.filmmakers.eu/de/actors/nicole-unger/video/261902'
                 pattern: ['^https://www\.filmmakers\.eu/\w{2}/actors/[\w-]+/video/\d+/?$', 'Bitte den Filmmakers-Link zum Video eintragen (…/actors/name/video/nummer).']
+              - { label: Vorschaubild (optional), name: poster, widget: image, required: false, choose_url: false }
+              - { label: Bildbeschreibung Vorschaubild, name: posterAlt, widget: string, required: false }
           - { label: Überschrift Galerie, name: galleryHeading, widget: string }
           - label: Galerie (Headshots & Szenenbilder)
             name: gallery

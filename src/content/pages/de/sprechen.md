@@ -2,7 +2,7 @@
 title: Sprechen
 description: Audio-Lounge der Sprecherin Nicole Unger – Hörbuch, Kinderbuch & Trickstimmen, Gesang, Bairisch und Werbung.
 kicker: Audio-Lounge
-intro: Hörbuch, Kinderbuch, Trickstimmen, Gesang und Werbung – auf Deutsch und Französisch, auf Wunsch auch auf Bairisch. Hören Sie selbst.
+intro: Hörbuch, Synchron, Voiceover und Werbung – auf Deutsch oder Bayerisch, Französisch und Englisch. Hören Sie selbst.
 image:
   image: /src/assets/uploads/sprechen.jpg
   alt: Platzhalter – Nicole Unger am Mikrofon im Tonstudio

@@ -2,7 +2,7 @@
 title: Voix
 description: Audio lounge de Nicole Unger – livres audio, livres jeunesse & voix de personnages, chant, bavarois et publicité.
 kicker: Audio lounge
-intro: Livres audio, livres jeunesse, voix de personnages, chant et publicité – en allemand et en français, et en bavarois sur demande. Écoutez vous-même.
+intro: Livres audio, doublage, voix off et publicité – en allemand ou en bavarois, en français et en anglais. Écoutez vous-même.
 image:
   image: /src/assets/uploads/sprechen.jpg
   alt: Image provisoire – Nicole Unger au micro dans un studio d'enregistrement

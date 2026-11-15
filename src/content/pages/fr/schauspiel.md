@@ -6,6 +6,8 @@ intro: Une présence à l'écran et sur scène – avec le regard précis de la 
 reelsHeading: Bandes démo
 reels:
   - title: International Showreel 2025
+    poster: /src/assets/uploads/124-nicole_unger_web_124.jpg
+    posterAlt: Nicole Unger – image extraite de la bande démo
     language: en
     description: Sous-titres en anglais
     url: https://www.filmmakers.eu/en/actors/nicole-unger/video/203091

@@ -6,6 +6,8 @@ intro: Presence on screen and on stage – with a dramaturge's keen eye for char
 reelsHeading: Showreels
 reels:
   - title: International Showreel 2025
+    poster: /src/assets/uploads/124-nicole_unger_web_124.jpg
+    posterAlt: Nicole Unger – still from the showreel
     language: en
     description: With English subtitles
     url: https://www.filmmakers.eu/en/actors/nicole-unger/video/203091
