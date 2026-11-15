@@ -1,8 +1,10 @@
 ---
 title: Sprechen
-description: Audio-Lounge der Sprecherin Nicole Unger – Hörbuch, Synchron & Voiceover (Deutsch und Französisch), Werbung & Dokumentation.
+description: Audio-Lounge der Sprecherin Nicole Unger – Hörbuch, Synchron &
+  Voiceover (Deutsch und Französisch), Werbung & Dokumentation.
 kicker: Audio-Lounge
-intro: Hörbuch, Synchron, Voiceover und Werbung – auf Deutsch und Französisch, auf Wunsch auch auf Bairisch. Hören Sie selbst.
+intro: Hörbuch, Synchron, Voiceover und Werbung – auf Deutsch oder Bayerisch,
+  Französisch und Englisch. Hören Sie selbst.
 image:
   image: /src/assets/uploads/sprechen.jpg
   alt: Platzhalter – Nicole Unger am Mikrofon im Tonstudio
@@ -19,6 +21,7 @@ traits:
     value: Trickstimmen, Figurenstimmen, Erzählstimme
 contact:
   heading: Anfragen für Sprachaufnahmen
-  text: Für Hörbuch-, Synchron- und Werbeanfragen schreiben Sie mir gerne direkt oder nutzen das Kontaktformular.
+  text: Für Hörbuch-, Synchron- und Werbeanfragen schreiben Sie mir gerne direkt
+    oder nutzen das Kontaktformular.
   emailKey: sprechen
 ---
