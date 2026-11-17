@@ -1,7 +1,8 @@
 ---
-title: "DIE SCHWARZE FLUT VON LAICHLINGEN"
-kind: "Vertical Drama"
-status: "In Entwicklung"
-logline: "Vertical Drama – vertikal erzählte Kurzserie für Smartphone-Plattformen."
+title: DIE SCHWARZE FLUT VON LAICHLINGEN
+kind: Vertical Drama
+status: In Entwicklung in Zusammenarbeit mit EILIN
+logline: Vertical Fantasy Drama – vertikal erzählte Kurzserie für
+  Smartphone-Plattformen.
 order: 3
 ---
