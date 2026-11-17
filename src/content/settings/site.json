@@ -8,15 +8,28 @@
     "phone": "+49 151 1524 5292"
   },
   "profiles": [
-    { "label": "Filmmakers", "url": "https://www.filmmakers.eu/de/actors/nicole-unger" },
-    { "label": "Castforward / e-TALENTA", "url": "https://www.castforward.de/members/profile/nicole-unger" },
-    { "label": "Crew United", "url": "https://www.crew-united.com/de/Nicole-Unger_47370.html" },
-    { "label": "IMDb", "url": "https://www.imdb.me/NicoleUnger" }
+    {
+      "label": "Filmmakers",
+      "url": "https://www.filmmakers.eu/de/actors/nicole-unger"
+    },
+    {
+      "label": "Castforward / e-TALENTA",
+      "url": "https://www.castforward.de/members/profile/nicole-unger"
+    },
+    {
+      "label": "Crew United",
+      "url": "https://www.crew-united.com/de/Nicole-Unger_47370.html"
+    },
+    {
+      "label": "IMDb",
+      "url": "https://www.imdb.me/NicoleUnger"
+    }
   ],
   "emails": [
-    { "key": "info", "label": "Allgemein", "address": "info@nicoleunger.com" },
-    { "key": "lektorat", "label": "Lektorat & Script Consulting", "address": "lektorat@nicoleunger.com" },
-    { "key": "stoffe", "label": "Stoffentwicklung", "address": "stoffe@nicoleunger.com" },
-    { "key": "sprechen", "label": "Sprechen & Audio", "address": "sprechen@nicoleunger.com" }
+    {
+      "key": "info",
+      "label": "Allgemein",
+      "address": "info@nicoleunger.com"
+    }
   ]
 }

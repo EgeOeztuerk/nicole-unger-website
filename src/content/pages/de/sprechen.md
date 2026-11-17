@@ -24,5 +24,5 @@ traits:
 contact:
   heading: Anfragen für Sprachaufnahmen
   text: Für Hörbuch-, Synchron- und Werbeanfragen schreiben Sie mir gerne direkt oder nutzen das Kontaktformular.
-  emailKey: sprechen
+  emailKey: info
 ---

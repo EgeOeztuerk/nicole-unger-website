@@ -24,5 +24,5 @@ traits:
 contact:
   heading: Demandes d'enregistrement
   text: Pour les livres audio, le doublage et la publicité, écrivez-moi directement ou utilisez le formulaire de contact.
-  emailKey: sprechen
+  emailKey: info
 ---

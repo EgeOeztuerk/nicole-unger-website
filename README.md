@@ -146,7 +146,7 @@ Das Formular `kontakt` (in `src/components/ContactForm.astro`) ist für **Netlif
 
 1. Netlify: *Domain management → Add a domain* (`nicoleunger.com`, DNS bei Cloudflare, Proxy aus) und DNS beim Domain-Anbieter wie angezeigt setzen. HTTPS wird automatisch aktiviert.
 2. Die endgültige Domain eintragen in: `astro.config.mjs` (`site`), `public/admin/config.yml` (`site_url`, `display_url`) und im CMS unter *Einstellungen* (E-Mail-Adressen).
-3. **Mail-Weiterleitungen** (info@, lektorat@, stoffe@, sprechen@ → private Adresse) werden **beim Domain-/Mail-Anbieter** eingerichtet (z. B. als Weiterleitung/Alias), nicht auf der Website.
+3. **E-Mail:** Nur `info@nicoleunger.com` – Weiterleitung über Cloudflare Email Routing an Nicoles private Adresse. Kontaktformular-Benachrichtigungen gehen per Netlify-Formular-Benachrichtigung ebenfalls an info@.
 
 ### Checkliste vor dem Livegang
 

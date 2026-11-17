@@ -65,7 +65,7 @@ const settings = await getSettings();
           {
             settings.emails.map((m) => (
               <div>
-                <dt>{m.label}</dt>
+                {settings.emails.length > 1 && <dt>{m.label}</dt>}
                 <dd>
                   <a href={`mailto:${m.address}`}>{m.address}</a>
                 </dd>

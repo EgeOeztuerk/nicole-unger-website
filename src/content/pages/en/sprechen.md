@@ -24,5 +24,5 @@ traits:
 contact:
   heading: Voice Recording Enquiries
   text: For audiobook, dubbing and commercial enquiries, write to me directly or use the contact form.
-  emailKey: sprechen
+  emailKey: info
 ---
