@@ -10,13 +10,21 @@ interface Props {
 
 const { entries, locale } = Astro.props;
 const t = useTranslations(locale);
-const categories = ['kino', 'tv', 'theater'] as const;
+const categories = ['kino', 'tv', 'theater', 'audio', 'werbung', 'sonstiges'] as const;
+/** „2009–2010“ bzw. nur „2026“ */
+const years = ({ year, yearEnd }: CollectionEntry<'vita'>['data']) =>
+  yearEnd && yearEnd !== year ? `${year}–${yearEnd}` : String(year);
 const groups = categories
   .map((category) => ({
     category,
     items: entries
       .filter((e) => e.data.category === category)
-      .sort((a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title)),
+      .sort(
+        (a, b) =>
+          (b.data.yearEnd ?? b.data.year) - (a.data.yearEnd ?? a.data.year) ||
+          b.data.year - a.data.year ||
+          a.data.title.localeCompare(b.data.title),
+      ),
   }))
   .filter((g) => g.items.length > 0);
 ---
@@ -39,7 +47,7 @@ const groups = categories
           <tbody>
             {group.items.map(({ data }) => (
               <tr>
-                <td>{data.year}</td>
+                <td>{years(data)}</td>
                 <th scope="row">{data.title}</th>
                 <td data-label={t('vita.role')}>{data.role}</td>
                 <td data-label={t('vita.director')}>{data.director}</td>
@@ -67,7 +75,7 @@ const groups = categories
       table-layout: fixed;
     }
     thead th:nth-child(1) {
-      width: 5.5rem;
+      width: 7rem;
     }
     thead th:nth-child(2) {
       width: 28%;
@@ -89,7 +97,8 @@ const groups = categories
     }
     tr {
       display: grid;
-      grid-template-columns: 3.25rem 1fr;
+      grid-template-columns: 4.5rem 1fr;
+      column-gap: 0.5rem;
       padding-block: 0.85rem;
       border-bottom: var(--border);
     }

@@ -14,9 +14,9 @@
     { "label": "IMDb", "url": "https://www.imdb.me/NicoleUnger" }
   ],
   "emails": [
-    { "key": "info", "label": "Allgemein", "address": "info@nicoleunger-creative.de" },
-    { "key": "lektorat", "label": "Lektorat & Script Consulting", "address": "lektorat@nicoleunger-creative.de" },
-    { "key": "stoffe", "label": "Stoffentwicklung", "address": "stoffe@nicoleunger-creative.de" },
-    { "key": "sprechen", "label": "Sprechen & Audio", "address": "sprechen@nicoleunger-creative.de" }
+    { "key": "info", "label": "Allgemein", "address": "info@nicoleunger.com" },
+    { "key": "lektorat", "label": "Lektorat & Script Consulting", "address": "lektorat@nicoleunger.com" },
+    { "key": "stoffe", "label": "Stoffentwicklung", "address": "stoffe@nicoleunger.com" },
+    { "key": "sprechen", "label": "Sprechen & Audio", "address": "sprechen@nicoleunger.com" }
   ]
 }

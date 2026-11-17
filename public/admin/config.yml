@@ -26,8 +26,8 @@ backend:
 local_backend: true
 
 locale: de
-site_url: https://nicoleunger-creative.de
-display_url: https://nicoleunger-creative.de
+site_url: https://nicoleunger.com
+display_url: https://nicoleunger.com
 
 # Bilder landen in src/assets/uploads und werden von Astro (astro:assets) optimiert.
 media_folder: src/assets/uploads
@@ -387,7 +387,7 @@ collections:
   - name: vita
     label: Vita (Schauspiel)
     label_singular: Vita-Eintrag
-    description: Produktionen für Kino & Film, Fernsehen und Theater.
+    description: Produktionen für Kino & Film, Fernsehen, Theater, Hörspiel, Werbung und Sonstiges.
     folder: src/content/vita
     create: true
     i18n: true
@@ -409,7 +409,11 @@ collections:
           - { label: Kino & Film, value: kino }
           - { label: Fernsehen, value: tv }
           - { label: Theater, value: theater }
+          - { label: Hörspiel & Audio, value: audio }
+          - { label: Werbung, value: werbung }
+          - { label: Sonstiges, value: sonstiges }
       - { label: Jahr, name: year, widget: number, value_type: int, min: 1950, max: 2100, i18n: duplicate }
+      - { label: Bis Jahr (optional), name: yearEnd, widget: number, value_type: int, min: 1950, max: 2100, required: false, i18n: duplicate, hint: 'Nur bei Produktionen über mehrere Jahre, z. B. 2009–2010.' }
       - { label: Rolle, name: role, widget: string, required: false, i18n: true }
       - { label: Regie, name: director, widget: string, required: false, i18n: duplicate }
       - { label: Produktion / Sender / Bühne, name: company, widget: string, required: false, i18n: duplicate }

@@ -195,8 +195,9 @@ const vita = defineCollection({
   loader: glob({ base: './src/content/vita', pattern: '**/*.md' }),
   schema: z.object({
     title: z.string(),
-    category: z.enum(['kino', 'tv', 'theater']),
+    category: z.enum(['kino', 'tv', 'theater', 'audio', 'werbung', 'sonstiges']),
     year: z.number().int().min(1950).max(2100),
+    yearEnd: optional(z.number().int().min(1950).max(2100)),
     role: z.string().optional(),
     director: z.string().optional(),
     company: z.string().optional(),
