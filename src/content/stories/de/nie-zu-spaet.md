@@ -1,7 +1,7 @@
 ---
 title: NIE ZU SPÄT
 kind: Vertical Drama
-status: In Entwicklung
+status: In Entwicklung in Zusammenarbeit mit EILIN
 logline: >-
   Eine Vertical Comedy nicht nur für Frauen von Nicole Unger
 

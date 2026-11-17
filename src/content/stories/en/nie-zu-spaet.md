@@ -2,7 +2,7 @@
 title: NIE ZU SPÄT / NEVER TOO LATE
 kind: Vertical drama
 year: null
-status: In development - Entwicklung in Zusammenarbeit mit EILIN
+status: In development with EILIN
 logline: >-
   A vertical comedy by Nicole Unger - not just for women:
 
