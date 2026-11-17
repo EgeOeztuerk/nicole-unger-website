@@ -233,13 +233,13 @@ const stories = defineCollection({
       .object({
         title: z.string(),
         kind: z.string(),
-        year: z.string().optional(),
-        status: z.string().optional(),
+        year: optional(z.coerce.string()),
+        status: optional(z.string()),
         logline: z.string(),
         image: optional(image()),
-        alt: z.string().optional(),
-        award: z.string().optional(),
-        linkLabel: z.string().optional(),
+        alt: optional(z.string()),
+        award: optional(z.string()),
+        linkLabel: optional(z.string()),
         linkUrl: optional(z.url()),
         order: z.number().default(100),
       })
