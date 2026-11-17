@@ -88,6 +88,12 @@ const acting = defineCollection({
       galleryHeading: z.string(),
       gallery: z.array(pictureWith(image).extend({ caption: z.string().optional() })),
       vitaHeading: z.string(),
+      trainingHeading: optional(z.string()),
+      training: z.array(z.object({ period: z.coerce.string(), title: z.string() })).default([]),
+      awardsHeading: optional(z.string()),
+      awards: z.array(z.object({ period: z.coerce.string(), title: z.string() })).default([]),
+      skillsHeading: optional(z.string()),
+      skills: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
       profilesHeading: z.string(),
       booking: z.object({
         heading: z.string(),

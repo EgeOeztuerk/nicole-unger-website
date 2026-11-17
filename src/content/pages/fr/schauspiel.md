@@ -49,6 +49,42 @@ gallery:
     alt: Nicole Unger en chemisier de dentelle blanc et collier de perles, en extérieur
     caption: "Photo : Darya Birnstiel"
 vitaHeading: Filmographie (sélection)
+trainingHeading: "Formation"
+training:
+  - period: "1995–1999"
+    title: "Académie bavaroise de théâtre August Everding, Munich – formation d'actrice"
+  - period: "2017–2020"
+    title: "Cours de chant avec Fawn Arnold"
+  - period: "2023"
+    title: "Atelier avec Nancy Bishop et Alison Murchie"
+  - period: "2024"
+    title: "Jo Kelly : « To be or not to act »"
+  - period: "2025"
+    title: "« Deine Präsenz – Deine Essenz » avec Iris Baumüller et Urban Ruths"
+awardsHeading: "Distinctions"
+awards:
+  - period: "2010"
+    title: "Prix du théâtre de Cologne pour « Petersberg 1 » (collectif Futur 3)"
+skillsHeading: "Profil"
+skills:
+  - label: "Basée à"
+    value: "Munich · résidences possibles notamment à Berlin, Hambourg, Cologne, Stuttgart, Zurich et Lyon"
+  - label: "Langues"
+    value: "Allemand et français (langues maternelles) · anglais · italien · espagnol · russe · latin"
+  - label: "Dialectes & accents"
+    value: "Bavarois (dialecte natal), munichois, allgäuer · Accents : anglais, français"
+  - label: "Voix & chant"
+    value: "Alto, mezzo-soprano · chanson, comédie musicale, pop, rock, ballade, gospel, classique, Schlager"
+  - label: "Instruments"
+    value: "Piano, accordéon, clavecin, percussions, vibraphone, xylophone"
+  - label: "Danse (sélection)"
+    value: "Ballet, jazz, danse moderne, comédie musicale, claquettes, flamenco, tango, danses de salon & latines"
+  - label: "Sport (sélection)"
+    value: "Équitation (dressage, western), patinage artistique, ski alpin, plongée, tir à l'arc, tai-chi, yoga"
+  - label: "Compétences particulières"
+    value: "Improvisation, comédie & clown, jeu masqué, échasses, animation, doublage & voix de personnages"
+  - label: "Associations"
+    value: "BFFS (association allemande des comédiens), WIFT Germany, Adami"
 profilesHeading: Profils & bases de données
 booking:
   heading: Réservations & demandes

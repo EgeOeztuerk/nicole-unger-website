@@ -1,2 +1,4 @@
 User-agent: *
 Disallow: /admin/
+
+Sitemap: https://nicoleunger.com/sitemap-index.xml

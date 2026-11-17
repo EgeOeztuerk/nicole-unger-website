@@ -64,6 +64,56 @@ const settings = await getSettings();
     </div>
   </section>
 
+  {
+    (data.training.length > 0 || data.awards.length > 0 || data.skills.length > 0) && (
+      <section class="section" aria-label={data.skillsHeading ?? data.trainingHeading}>
+        <div class="container profile">
+          <div class="profile__col">
+            {data.training.length > 0 && (
+              <div class="profile__block">
+                <h2>{data.trainingHeading}</h2>
+                <dl class="timeline">
+                  {data.training.map((item) => (
+                    <div>
+                      <dt>{item.period}</dt>
+                      <dd>{item.title}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+            {data.awards.length > 0 && (
+              <div class="profile__block">
+                <h2>{data.awardsHeading}</h2>
+                <dl class="timeline">
+                  {data.awards.map((item) => (
+                    <div>
+                      <dt>{item.period}</dt>
+                      <dd>{item.title}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+          </div>
+          {data.skills.length > 0 && (
+            <div class="profile__block">
+              <h2>{data.skillsHeading}</h2>
+              <dl class="skills">
+                {data.skills.map((item) => (
+                  <div>
+                    <dt>{item.label}</dt>
+                    <dd>{item.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          )}
+        </div>
+      </section>
+    )
+  }
+
   <section class="section" id="buchung" aria-labelledby="booking-title">
     <div class="container booking">
       <div class="booking__main">
@@ -135,6 +185,55 @@ const settings = await getSettings();
     }
     .reels__item--featured {
       grid-column: 1 / -1;
+    }
+  }
+  .profile {
+    display: grid;
+    gap: var(--space-xl);
+  }
+  .profile__col {
+    display: grid;
+    gap: var(--space-xl);
+    align-content: start;
+  }
+  .profile__block h2 {
+    margin-bottom: var(--space-md);
+  }
+  .timeline,
+  .skills {
+    display: grid;
+    margin: 0;
+  }
+  .timeline div,
+  .skills div {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: var(--space-sm);
+    padding-block: 0.75rem;
+    border-bottom: var(--border);
+  }
+  .timeline dt,
+  .skills dt {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+  .skills div {
+    grid-template-columns: 11rem 1fr;
+  }
+  .timeline dd,
+  .skills dd {
+    margin: 0;
+  }
+  @media (max-width: 40em) {
+    .skills div {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
+    }
+  }
+  @media (min-width: 56em) {
+    .profile {
+      grid-template-columns: 1fr 1.3fr;
+      gap: var(--space-xl);
     }
   }
   .booking {

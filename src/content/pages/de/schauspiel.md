@@ -53,6 +53,42 @@ gallery:
     alt: Nicole Unger in weißer Spitzenbluse mit Perlenkette, im Freien
     caption: "Foto: Darya Birnstiel"
 vitaHeading: Vita (Auswahl)
+trainingHeading: "Ausbildung"
+training:
+  - period: "1995–1999"
+    title: "Bayerische Theaterakademie August Everding, München – Schauspielausbildung"
+  - period: "2017–2020"
+    title: "Gesangsunterricht bei Fawn Arnold"
+  - period: "2023"
+    title: "Workshop mit Nancy Bishop und Alison Murchie"
+  - period: "2024"
+    title: "Jo Kelly: „To be or not to act“"
+  - period: "2025"
+    title: "„Deine Präsenz – Deine Essenz“ mit Iris Baumüller und Urban Ruths"
+awardsHeading: "Auszeichnungen"
+awards:
+  - period: "2010"
+    title: "Kölner Theaterpreis für „Petersberg 1“ (Futur 3 Theaterkollektiv)"
+skillsHeading: "Profil"
+skills:
+  - label: "Basis"
+    value: "München · Wohnmöglichkeiten u. a. in Berlin, Hamburg, Köln, Stuttgart, Zürich und Lyon"
+  - label: "Sprachen"
+    value: "Deutsch und Französisch (Muttersprachen) · Englisch · Italienisch · Spanisch · Russisch · Latein"
+  - label: "Dialekte & Akzente"
+    value: "Bairisch (Heimatdialekt), Münchnerisch, Allgäuerisch · Akzente: Englisch, Französisch"
+  - label: "Stimmlage & Gesang"
+    value: "Alt, Mezzosopran · Chanson, Musical, Pop, Rock, Ballade, Gospel, Klassik, Schlager"
+  - label: "Instrumente"
+    value: "Klavier, Akkordeon, Cembalo, Percussion, Vibraphon, Xylophon"
+  - label: "Tanz (Auswahl)"
+    value: "Ballett, Jazzdance, Modern Dance, Musical, Steppen, Flamenco, Tango, Standard & Latein"
+  - label: "Sport (Auswahl)"
+    value: "Reiten (Dressur, Western), Eiskunstlauf, Ski alpin, Tauchen, Bogenschießen, Tai Chi, Yoga"
+  - label: "Besondere Fähigkeiten"
+    value: "Improvisation, Comedy & Clown, Maskenspiel, Stelzenlauf, Moderation, Synchron & Trickstimmen"
+  - label: "Verbände"
+    value: "Bundesverband Schauspiel (BFFS), WIFT Germany, Adami"
 profilesHeading: Profile & Datenbanken
 booking:
   heading: Buchung & Anfragen

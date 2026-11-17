@@ -49,6 +49,42 @@ gallery:
     alt: Nicole Unger in a white lace blouse and pearl necklace, outdoors
     caption: "Photo: Darya Birnstiel"
 vitaHeading: Credits (selection)
+trainingHeading: "Training"
+training:
+  - period: "1995–1999"
+    title: "Bavarian Theatre Academy August Everding, Munich – acting degree"
+  - period: "2017–2020"
+    title: "Singing lessons with Fawn Arnold"
+  - period: "2023"
+    title: "Workshop with Nancy Bishop and Alison Murchie"
+  - period: "2024"
+    title: "Jo Kelly: “To be or not to act”"
+  - period: "2025"
+    title: "“Deine Präsenz – Deine Essenz” with Iris Baumüller and Urban Ruths"
+awardsHeading: "Awards"
+awards:
+  - period: "2010"
+    title: "Cologne Theatre Prize for “Petersberg 1” (Futur 3 theatre collective)"
+skillsHeading: "Profile"
+skills:
+  - label: "Based in"
+    value: "Munich · can work as a local in Berlin, Hamburg, Cologne, Stuttgart, Zurich and Lyon, among others"
+  - label: "Languages"
+    value: "German and French (native) · English · Italian · Spanish · Russian · Latin"
+  - label: "Dialects & accents"
+    value: "Bavarian (native dialect), Munich, Allgäu · Accents: English, French"
+  - label: "Voice & singing"
+    value: "Alto, mezzo-soprano · chanson, musical, pop, rock, ballad, gospel, classical, Schlager"
+  - label: "Instruments"
+    value: "Piano, accordion, harpsichord, percussion, vibraphone, xylophone"
+  - label: "Dance (selection)"
+    value: "Ballet, jazz, modern, musical theatre, tap, flamenco, tango, ballroom & Latin"
+  - label: "Sports (selection)"
+    value: "Horse riding (dressage, western), figure skating, alpine skiing, scuba diving, archery, tai chi, yoga"
+  - label: "Special skills"
+    value: "Improvisation, comedy & clowning, mask work, stilt walking, presenting, dubbing & character voices"
+  - label: "Memberships"
+    value: "German Actors' Association (BFFS), WIFT Germany, Adami"
 profilesHeading: Profiles & Databases
 booking:
   heading: Bookings & Enquiries

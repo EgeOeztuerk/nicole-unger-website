@@ -150,7 +150,7 @@ Das Formular `kontakt` (in `src/components/ContactForm.astro`) ist für **Netlif
 
 ### Checkliste vor dem Livegang
 
-- [ ] Datenschutzerklärung vollständig ersetzen (Platzhalter!). Netlify als Hoster/Formulardienst und Filmmakers als eingebetteten Player nennen.
+- [x] Datenschutzerklärung (DE/EN/FR) – Stand November 2026; bei neuen Diensten (z. B. Zoho, Analytics) ergänzen.
 - [ ] Impressum/Haftungsausschluss rechtlich prüfen lassen.
 - [ ] Echte Hörproben hochladen (Gesang, Bairisch, Hörbuch/Kinderbuch/Trickstimme, Werbung).
 - [ ] Alle Platzhalterbilder und -hörproben ersetzen; Vita, Stationen und Stories mit echten Daten füllen.

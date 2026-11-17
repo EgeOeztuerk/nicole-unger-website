@@ -145,6 +145,33 @@ collections:
               - { label: Bildbeschreibung (Alternativtext), name: alt, widget: string }
               - { label: Bildunterschrift / Fotocredit, name: caption, widget: string, required: false }
           - { label: Überschrift Vita, name: vitaHeading, widget: string, hint: 'Die Vita-Einträge selbst pflegen Sie unter „Vita (Schauspiel)“.' }
+          - { label: Überschrift Ausbildung, name: trainingHeading, widget: string, required: false }
+          - label: Ausbildung
+            name: training
+            widget: list
+            required: false
+            summary: '{{fields.period}} · {{fields.title}}'
+            fields:
+              - { label: Zeitraum, name: period, widget: string, hint: 'z. B. 1995–1999 oder 2024' }
+              - { label: Beschreibung, name: title, widget: string }
+          - { label: Überschrift Auszeichnungen, name: awardsHeading, widget: string, required: false }
+          - label: Auszeichnungen
+            name: awards
+            widget: list
+            required: false
+            summary: '{{fields.period}} · {{fields.title}}'
+            fields:
+              - { label: Jahr, name: period, widget: string }
+              - { label: Auszeichnung, name: title, widget: string }
+          - { label: Überschrift Profil, name: skillsHeading, widget: string, required: false }
+          - label: Profil (Sprachen, Gesang, Fähigkeiten …)
+            name: skills
+            widget: list
+            required: false
+            summary: '{{fields.label}}'
+            fields:
+              - { label: Bezeichnung, name: label, widget: string, hint: 'z. B. Sprachen' }
+              - { label: Inhalt, name: value, widget: string }
           - { label: Überschrift Profile, name: profilesHeading, widget: string, hint: 'Die Links pflegen Sie unter „Einstellungen“.' }
           - label: Buchungshinweis
             name: booking
