@@ -2,7 +2,7 @@
 title: Schauspiel
 description: Showreel, Headshots und Vita der Schauspielerin Nicole Unger – Kino, Fernsehen und Theater. Anfragen über die Agentur Lieblingsmensch.
 kicker: Film · Fernsehen · Theater
-intro: Präsenz vor der Kamera und auf der Bühne – mit dem genauen Blick der Dramaturgin für Figur und Geschichte.
+intro: "Langjährige Film- und Fernseherfahrung und eine fundierte Theaterausbildung, verbunden mit einer besonderen Affinität zu anspruchsvollen Kinostoffen, historischen Figuren und internationalen Produktionen. Zweisprachig aufgewachsen mit Deutsch und Französisch, exzellent in Englisch und mit Kenntnissen in Russisch, Spanisch und Italienisch, bin ich als gebürtige Münchnerin in lokal verorteten, bayerischen Projekten ebenso zuhause wie auf internationalem Parkett an der Seite von Stars wie Vicky Krieps, Barbara Sukowa oder Katja Riemann."
 reelsHeading: Showreels
 reels:
   - title: Showreel 2026

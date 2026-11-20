@@ -2,7 +2,7 @@
 title: Acting
 description: Showreels, headshots and CV of actress Nicole Unger – film, television and theatre. Bookings via Agentur Lieblingsmensch.
 kicker: Film · Television · Theatre
-intro: Presence on screen and on stage – with a dramaturge's keen eye for character and story.
+intro: "Many years of film and television experience and a solid theatre training, combined with a particular affinity for ambitious cinema projects, historical characters and international productions. Raised bilingual in German and French, fluent in English and with a working knowledge of Russian, Spanish and Italian, I am – as a native of Munich – just as much at home in locally rooted Bavarian projects as on the international stage alongside stars such as Vicky Krieps, Barbara Sukowa and Katja Riemann."
 reelsHeading: Showreels
 reels:
   - title: International Showreel 2025

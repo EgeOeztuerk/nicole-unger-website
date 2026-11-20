@@ -22,6 +22,7 @@ const de = {
   'footer.legal': 'Rechtliches',
   'footer.contact': 'Kontakt',
   'footer.acting': 'Schauspiel-Anfragen',
+  'footer.photos': 'Fotos',
   'hero.pause': 'Bildwechsel anhalten',
   'hero.play': 'Bildwechsel fortsetzen',
   'embed.notice':
@@ -119,6 +120,7 @@ const en: Record<UiKey, string> = {
   'footer.legal': 'Legal',
   'footer.contact': 'Contact',
   'footer.acting': 'Acting enquiries',
+  'footer.photos': 'Photos',
   'hero.pause': 'Pause slideshow',
   'hero.play': 'Resume slideshow',
   'embed.notice':
@@ -214,6 +216,7 @@ const fr: Record<UiKey, string> = {
   'footer.legal': 'Informations légales',
   'footer.contact': 'Contact',
   'footer.acting': 'Demandes de casting',
+  'footer.photos': 'Photos',
   'hero.pause': 'Mettre le diaporama en pause',
   'hero.play': 'Reprendre le diaporama',
   'embed.notice':

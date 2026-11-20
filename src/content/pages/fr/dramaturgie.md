@@ -13,18 +13,17 @@ references:
     - Telepool
     - Leonine
     - Global Screen
-    - Bayerisches Staatsschauspiel
 stationsHeading: Parcours
 packagesHeading: Offres & tarifs indicatifs
 packages:
   - title: Analyse de synopsis & de concept
     tagline: Idéal en début de développement ou pour préparer une demande d'aide.
     service: Analyse du logline, de la prémisse, des personnages et de la structure à partir du pitch deck, du synopsis ou du traitement (15 pages max.). Retour écrit avec des pistes concrètes pour la suite du développement.
-    fee: à partir de 350 € *
+    fee: à partir de 250 € *
   - title: Fiche de lecture professionnelle (script reading)
     tagline: Une base de décision solide pour sociétés de production, distributeurs et chaînes.
     service: Lecture intégrale du scénario (long métrage ou concept de série). Analyse écrite détaillée du concept, de la structure, des dialogues, des personnages, du public cible et du potentiel commercial.
-    fee: Forfait sur devis (à partir de 480 € / env. 5 € par page de scénario) *
+    fee: Forfait sur devis (à partir de 350 €) *
   - title: Script consulting & doctoring sur mesure
     tagline: Un accompagnement intensif et continu de votre projet.
     service: Conseil dramaturgique personnalisé, du traitement à la version de tournage. Accompagnement de l'écriture en séances en personne ou en ligne, analyse des réécritures et adaptations, résolution ciblée de problèmes d'intrigue ou d'arcs de personnages.

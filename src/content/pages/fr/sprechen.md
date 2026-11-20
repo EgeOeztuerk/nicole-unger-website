@@ -2,7 +2,7 @@
 title: Voix
 description: Audio lounge de Nicole Unger – livres audio, livres jeunesse & voix de personnages, chant, bavarois et publicité.
 kicker: Audio lounge
-intro: Livres audio, doublage, voix off et publicité – en allemand ou en bavarois, en français et en anglais. Écoutez vous-même.
+intro: "Livres audio, doublage, voix off et publicité – en allemand ou en bavarois, en français et en anglais. Travailler avec ma voix me procure une grande joie : en plus de la voix off, je monterai sur scène dès 2027 comme autrice-compositrice-interprète au sein du groupe BITTERBLAUE SCHOKOLADE."
 image:
   image: /src/assets/uploads/124-nicole_unger_web_124.jpg
   alt: Nicole Unger, portrait sur fond bleu clair
@@ -11,6 +11,7 @@ reel:
   text: Une sélection de mes échantillons de voix
   url: https://www.filmmakers.eu/en/actors/nicole-unger/audio/146232
 loungeHeading: Échantillons de voix
+loungeText: "Je vous établis volontiers une offre personnalisée ainsi qu'un échantillon de voix enregistré avec votre propre texte de casting."
 traitsHeading: Caractéristiques de la voix
 traits:
   - label: Tessiture

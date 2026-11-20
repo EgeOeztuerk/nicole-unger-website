@@ -48,7 +48,16 @@ const groups = categories
             {group.items.map(({ data }) => (
               <tr>
                 <td>{years(data)}</td>
-                <th scope="row">{data.title}</th>
+                <th scope="row">
+                  {data.link ? (
+                    <a href={data.link} target="_blank" rel="noopener">
+                      {data.title}
+                      <span class="visually-hidden"> {t('common.externalLink')}</span>
+                    </a>
+                  ) : (
+                    data.title
+                  )}
+                </th>
                 <td data-label={t('vita.role')}>{data.role}</td>
                 <td data-label={t('vita.director')}>{data.director}</td>
                 <td data-label={t('vita.company')}>{data.company}</td>
@@ -69,6 +78,11 @@ const groups = categories
   tbody th {
     font-weight: 500;
     color: var(--color-heading);
+  }
+  tbody th a {
+    color: inherit;
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 0.2em;
   }
   @media (min-width: 40.01em) {
     .data-table {

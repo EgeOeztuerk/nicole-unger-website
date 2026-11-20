@@ -9,11 +9,7 @@ portrait:
 engagement:
   heading: Engagement & valeurs
   text: Dans ma vie privée, préserver les ressources de notre planète me tient particulièrement à cœur. Les animaux et la nature occupent une grande place dans ma vie. À mes yeux, seul un vivre-ensemble respectueux, bienveillant et d'égal à égal peut nous mener vers un avenir digne d'être vécu.
-  items:
-    - Membre du Bund Naturschutz in Bayern e.V. – protection des tritons et des crapauds
-    - Organisation d'une action de plantation d'arbres
-    - Justice climatique et responsabilité sociale
-    - Diversité et égalité des genres – aussi dans mes projets artistiques
+  items: []
 contact:
   heading: Contact
   intro: Je me réjouis de votre message – qu'il s'agisse d'une lecture de scénario, d'un développement, d'un enregistrement voix ou simplement d'une première prise de contact.

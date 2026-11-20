@@ -12,5 +12,7 @@ logline: >-
   SEX AND THE CITY trifft auf deutsche Lebenswirklichkeit – mit der Intimität einer
 
   Kammersitcom und dem Tempo einer Vertical-Serie.
+linkLabel: EILIN
+linkUrl: https://eilin.de/
 order: 4
 ---

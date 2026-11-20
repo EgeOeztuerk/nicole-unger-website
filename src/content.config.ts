@@ -119,6 +119,7 @@ const voice = defineCollection({
         })
         .optional(),
       loungeHeading: z.string(),
+      loungeText: optional(z.string()),
       traitsHeading: z.string(),
       traits: z.array(z.object({ label: z.string(), value: z.string() })),
       contact: z.object({
@@ -207,6 +208,7 @@ const vita = defineCollection({
     role: z.string().optional(),
     director: z.string().optional(),
     company: z.string().optional(),
+    link: optional(z.url()),
   }),
 });
 
@@ -269,6 +271,7 @@ const settings = defineCollection({
       phone: z.string().optional(),
     }),
     profiles: z.array(z.object({ label: z.string(), url: z.url() })),
+    photoCredits: optional(z.string()),
     emails: z.array(
       z.object({
         key: z.string(),

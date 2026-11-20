@@ -2,7 +2,7 @@
 title: Sprechen
 description: Audio-Lounge der Sprecherin Nicole Unger – Hörbuch, Kinderbuch & Trickstimmen, Gesang, Bairisch und Werbung.
 kicker: Audio-Lounge
-intro: Hörbuch, Synchron, Voiceover und Werbung – auf Deutsch oder Bayerisch, Französisch und Englisch. Hören Sie selbst.
+intro: "Hörbuch, Synchron, Voiceover und Werbung – auf Deutsch oder Bayerisch, Französisch und Englisch. Die Arbeit mit meiner Stimme bereitet mir große Freude: Neben dem Sprechen stehe ich als Mitglied der Band BITTERBLAUE SCHOKOLADE ab 2027 auch als Singer-Songwriterin auf der Bühne."
 image:
   image: /src/assets/uploads/124-nicole_unger_web_124.jpg
   alt: Nicole Unger, Porträt vor hellblauem Hintergrund
@@ -11,6 +11,7 @@ reel:
   text: Eine Auswahl meiner Hörproben
   url: https://www.filmmakers.eu/de/actors/nicole-unger/audio/146232
 loungeHeading: Hörproben
+loungeText: "Gern erstelle ich Ihnen ein individuelles Angebot sowie eine Hörprobe mit Ihrem individuellen Casting-Text."
 traitsHeading: Stimmmerkmale
 traits:
   - label: Stimmlage

@@ -9,11 +9,7 @@ portrait:
 engagement:
   heading: Commitment & Values
   text: In my private life, treating our planet's resources with care matters a great deal to me. Animals and nature take up a large part of my life. In my view, appreciative and respectful interaction on an equal footing is the only thing that can lead us to a future worth living.
-  items:
-    - Member of Bund Naturschutz in Bayern e.V. – protecting newts and toads
-    - Organised a tree-planting campaign
-    - Climate justice and social responsibility
-    - Diversity and gender equality – in my artistic projects, too
+  items: []
 contact:
   heading: Contact
   intro: I look forward to hearing from you – whether it's a script reading request, story development, a voice recording or simply getting to know each other.

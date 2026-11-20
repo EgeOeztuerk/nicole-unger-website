@@ -13,18 +13,17 @@ references:
     - Telepool
     - Leonine
     - Global Screen
-    - Bayerisches Staatsschauspiel
 stationsHeading: Experience
 packagesHeading: Services & Guide Fees
 packages:
   - title: Treatment & Concept Check
     tagline: Ideal for early development or for preparing funding applications.
     service: Analysis of logline, premise, character constellation and plot structure based on your pitch deck, outline or treatment (up to 15 pages). Written feedback with concrete suggestions for further development.
-    fee: from €350 *
+    fee: from €250 *
   - title: Professional Script Report (Script Reading)
     tagline: A well-founded basis for decisions by production companies, distributors and commissioning editors.
     service: Complete reading of the screenplay (for feature films or series concepts). Detailed written analysis of concept, structure, dialogue, characters, target audience and market potential.
-    fee: Flat fee by arrangement (guide price from €480 / approx. €5 per script page) *
+    fee: Flat fee by arrangement (guide price from €350) *
   - title: Individual Script Consulting & Doctoring
     tagline: Intensive, ongoing support for your project.
     service: Tailored dramaturgical advice from treatment to shooting script. Support during the writing process in personal or online sessions, analysis of revisions and adaptations, and targeted fixes for plot holes or character arcs.

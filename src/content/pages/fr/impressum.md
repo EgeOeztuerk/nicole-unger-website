@@ -22,6 +22,10 @@ Web : [www.agenturlm.de](https://www.agenturlm.de)
 
 Nicole Unger, adresse ci-dessus
 
+## Crédits photos
+
+Photos : © Darya Birnstiel, © Urban Ruths
+
 ## Clause de non-responsabilité
 
 ### Responsabilité quant au contenu

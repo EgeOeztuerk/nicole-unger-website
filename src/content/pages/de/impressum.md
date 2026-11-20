@@ -19,6 +19,10 @@ Web: [www.agenturlm.de](https://www.agenturlm.de)
 
 Nicole Unger, Anschrift wie oben
 
+## Bildnachweis
+
+Fotos: © Darya Birnstiel, © Urban Ruths
+
 ## Haftungsausschluss
 
 ### Haftung für Inhalte

@@ -9,11 +9,7 @@ portrait:
 engagement:
   heading: Engagement & Werte
   text: Privat ist mir ein ressourcenschonender Umgang mit unserer Erde besonders wichtig. Tiere und Natur nehmen einen großen Platz in meinem Leben ein. Ein wertschätzendes, respektvolles Miteinander auf Augenhöhe ist aus meiner Sicht das Einzige, was uns in eine lebenswerte Zukunft führen kann.
-  items:
-    - Mitglied im Bund Naturschutz in Bayern e.V. – Schutz von Molchen und Kröten
-    - Organisation einer Baumpflanzaktion
-    - Klimagerechtigkeit und soziale Verantwortung
-    - Diversität und Geschlechtergerechtigkeit – auch in meinen künstlerischen Projekten
+  items: []
 contact:
   heading: Kontakt
   intro: Ich freue mich auf Ihre Nachricht – ob Lektoratsanfrage, Stoffentwicklung, Sprachaufnahme oder ein erstes Kennenlernen.

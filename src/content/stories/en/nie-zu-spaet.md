@@ -14,6 +14,7 @@ logline: >-
 
   chamber sitcom and the fast pace of a vertical-format series.
 image: null
-linkUrl: null
+linkLabel: EILIN
+linkUrl: https://eilin.de/
 order: 4
 ---

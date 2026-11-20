@@ -13,18 +13,17 @@ references:
     - Telepool
     - Leonine
     - Global Screen
-    - Bayerisches Staatsschauspiel
 stationsHeading: Stationen
 packagesHeading: Mein Angebot & Honorar-Richtwerte
 packages:
   - title: Exposé- & Konzept-Check
     tagline: Perfekt für die frühe Entwicklungsphase oder zur Vorbereitung von Förderanträgen.
     service: Analyse von Logline, Prämisse, Figurenkonstellation und Plot-Struktur auf Basis des Pitchdecks, Exposés oder Treatments (bis max. 15 Seiten). Schriftliches Feedback mit konkreten Optimierungsvorschlägen für die Weiterentwicklung.
-    fee: ab 350,- € *
+    fee: ab 250,- € *
   - title: Professionelles Stoffgutachten (Drehbuchlektorat / Script Reading)
     tagline: Die fundierte Entscheidungsgrundlage für Produktionsfirmen, Verleiher und Redaktionen.
     service: Vollständige Sichtung des Drehbuchs (abgestimmt auf abendfüllende Spielfilme oder Serienkonzepte). Ausführliche schriftliche Analyse hinsichtlich Konzeption, Struktur, Dialogen, Charakteren, Zielgruppe und Marktpotenzial.
-    fee: Pauschale nach Absprache (Richtwert ab 480,- € / ca. 5,- € pro Drehbuchseite) *
+    fee: Pauschale nach Absprache (Richtwert ab 350,- €) *
   - title: Individuelles Script Consulting & Doctoring
     tagline: Die intensive, fortlaufende Begleitung Ihres Projekts.
     service: Maßgeschneiderte dramaturgische Beratung vom Treatment bis zur Drehfassung. Begleitung im Schreibprozess durch persönliche oder digitale Sessions, Analyse von Überarbeitungen und Adaptionen sowie gezielte Problembehebung bei Plot-Löchern oder Charakterbögen.

@@ -2,7 +2,7 @@
 title: Comédienne
 description: Bandes démo, photos et CV de la comédienne Nicole Unger – cinéma, télévision et théâtre. Demandes via l'agence Lieblingsmensch.
 kicker: Cinéma · Télévision · Théâtre
-intro: Une présence à l'écran et sur scène – avec le regard précis de la dramaturge pour le personnage et l'histoire.
+intro: "Une longue expérience du cinéma et de la télévision et une solide formation théâtrale, alliées à une affinité particulière pour les projets de cinéma exigeants, les personnages historiques et les productions internationales. Bilingue allemand-français depuis l'enfance, excellente en anglais et avec des notions de russe, d'espagnol et d'italien, je suis, en Munichoise de naissance, aussi à l'aise dans des projets bavarois ancrés localement que sur la scène internationale aux côtés de stars comme Vicky Krieps, Barbara Sukowa ou Katja Riemann."
 reelsHeading: Bandes démo
 reels:
   - title: International Showreel 2025
