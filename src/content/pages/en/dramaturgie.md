@@ -4,8 +4,8 @@ description: Story development, script reading and script consulting by graduate
 kicker: Story Development & Script Reading
 lead: In-depth story analysis where theory meets practice.
 image:
-  image: /src/assets/uploads/nicole-unger-07.jpg
-  alt: Nicole Unger wearing large black glasses
+  image: /src/assets/uploads/nicole-unger-dramaturgie.jpg
+  alt: Nicole Unger in a white blouse against a black background, smiling
 languagesNote: I offer my services in German, French and English.
 references:
   label: References & collaborations (selection)

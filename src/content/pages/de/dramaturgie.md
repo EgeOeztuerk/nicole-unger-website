@@ -4,8 +4,8 @@ description: Stoffentwicklung, Lektorat und Script Consulting von Diplom-Dramatu
 kicker: Stoffentwicklung & Lektorat
 lead: Fundierte Stoffanalyse an der Schnittstelle von Theorie und Praxis.
 image:
-  image: /src/assets/uploads/nicole-unger-07.jpg
-  alt: Nicole Unger mit großer schwarzer Brille
+  image: /src/assets/uploads/nicole-unger-dramaturgie.jpg
+  alt: Nicole Unger in weißer Bluse vor schwarzem Hintergrund, lächelnd
 languagesNote: Meine Leistungen biete ich in den Sprachen Deutsch, Französisch und Englisch an.
 references:
   label: Referenzen & Kooperationen (Auswahl)
